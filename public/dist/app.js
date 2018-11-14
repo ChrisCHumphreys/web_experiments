@@ -117,7 +117,7 @@ var Bar = { template: '<div>bar</div>' };
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     mode: 'history',
-    base: 'app/',
+    base: '/',
     routes: [{ path: '/foo', component: Foo }, { path: '/bar', component: Bar }]
 });
 

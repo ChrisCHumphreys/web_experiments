@@ -8,7 +8,7 @@ const Bar = {template: '<div>bar</div>'}
 
 const router = new VueRouter({
     mode: 'history',
-    base: 'app/',
+    base: '/',
     routes: [
         {path: '/foo', component: Foo},
         {path: '/bar', component: Bar}
