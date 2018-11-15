@@ -1,5 +1,5 @@
 <template>
-    <div class="columns">
+    <div class="columns is-h-scrollable">
         <div class="column">
             <div class="is-multiline is is-centered"
                  v-for="row in this.boardHeight">
@@ -25,8 +25,8 @@
         },
         data: function () {
             return {
-                boardHeight: 10,
-                boardWidth: 10,
+                boardHeight: 100,
+                boardWidth: 100,
             }
         },
         methods: {
@@ -42,5 +42,10 @@
 </script>
 
 <style scoped>
+
+    .is-h-scrollable {
+        overflow: auto;
+        white-space: nowrap;
+    }
 
 </style>

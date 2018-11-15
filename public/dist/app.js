@@ -14892,7 +14892,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.is-h-scrollable[data-v-7dc731e3] {\n    overflow: auto;\n    white-space: nowrap;\n}\n\n", ""]);
 
 // exports
 
@@ -14932,8 +14932,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            boardHeight: 10,
-            boardWidth: 10
+            boardHeight: 100,
+            boardWidth: 100
         };
     },
     methods: {
@@ -14982,7 +14982,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.square[data-v-76acc71a] {\n    width: 5%;\n    padding-bottom: 5%;\n    border-style: inset;\n}\n\n", ""]);
+exports.push([module.i, "\n.square[data-v-76acc71a] {\n    width: 75px;\n    padding-bottom: 75px;\n    border-style: inset;\n}\n\n", ""]);
 
 // exports
 
@@ -15037,7 +15037,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "columns" }, [
+  return _c("div", { staticClass: "columns is-h-scrollable" }, [
     _c(
       "div",
       { staticClass: "column" },
