@@ -3,7 +3,7 @@
         <div class="column">
             <div class="is-multiline is is-centered"
                  v-for="row in this.boardHeight">
-                <div class="level-left">
+                <div class="level-item">
                     <the-tile-component
                             v-for="tile in boardWidth"
                             :key="tile"
