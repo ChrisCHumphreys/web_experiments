@@ -1,17 +1,17 @@
 <template>
-    <div>
-        <section class="section">
-            <div class="container">
-                <div class="level">
+    <div class="columns">
+        <div class="column">
+            <div class="is-multiline is is-centered"
+                 v-for="row in this.boardHeight">
+                <div class="level-left">
                     <the-tile-component
-                            color="red">
-                    </the-tile-component>
-                    <the-tile-component
-                            color="blue">
+                            v-for="tile in boardWidth"
+                            :key="tile"
+                            :color="assignColorToTile(row, tile)">
                     </the-tile-component>
                 </div>
             </div>
-        </section>
+        </div>
     </div>
 </template>
 
@@ -22,7 +22,22 @@
         name: "theBoardComponent",
         components: {
             TheTileComponent
-        }
+        },
+        data: function () {
+            return {
+                boardHeight: 10,
+                boardWidth: 10,
+            }
+        },
+        methods: {
+            assignColorToTile: (row, tile) => {
+                if ((row + tile) % 2 === 0) {
+                    return "blue";
+                } else {
+                    return "red";
+                }
+            },
+        },
     }
 </script>
 

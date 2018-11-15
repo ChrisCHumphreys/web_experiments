@@ -17,8 +17,9 @@
 
 <style scoped>
     .square {
-        width: 10%;
-        padding-bottom: 10%;
+        width: 5%;
+        padding-bottom: 5%;
+        border-style: inset;
     }
 
 </style>

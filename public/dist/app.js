@@ -14841,7 +14841,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -14878,6 +14878,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: "theBoardComponent",
     components: {
         TheTileComponent: __WEBPACK_IMPORTED_MODULE_0__theTileComponent___default.a
+    },
+    data: function data() {
+        return {
+            boardHeight: 10,
+            boardWidth: 10
+        };
+    },
+    methods: {
+        assignColorToTile: function assignColorToTile(row, tile) {
+            if ((row + tile) % 2 === 0) {
+                return "blue";
+            } else {
+                return "red";
+            }
+        }
     }
 });
 
@@ -14889,21 +14904,25 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("section", { staticClass: "section" }, [
-      _c("div", { staticClass: "container" }, [
-        _c(
-          "div",
-          { staticClass: "level" },
-          [
-            _c("the-tile-component", { attrs: { color: "red" } }),
-            _vm._v(" "),
-            _c("the-tile-component", { attrs: { color: "blue" } })
-          ],
-          1
-        )
-      ])
-    ])
+  return _c("div", { staticClass: "columns" }, [
+    _c(
+      "div",
+      { staticClass: "column" },
+      _vm._l(this.boardHeight, function(row) {
+        return _c("div", { staticClass: "is-multiline is is-centered" }, [
+          _c(
+            "div",
+            { staticClass: "level-left" },
+            _vm._l(_vm.boardWidth, function(tile) {
+              return _c("the-tile-component", {
+                key: tile,
+                attrs: { color: _vm.assignColorToTile(row, tile) }
+              })
+            })
+          )
+        ])
+      })
+    )
   ])
 }
 var staticRenderFns = []
@@ -15182,7 +15201,7 @@ exports = module.exports = __webpack_require__(1)(false);
 
 
 // module
-exports.push([module.i, "\n.square[data-v-76acc71a] {\n    width: 10%;\n    padding-bottom: 10%;\n}\n\n", ""]);
+exports.push([module.i, "\n.square[data-v-76acc71a] {\n    width: 5%;\n    padding-bottom: 5%;\n    border-style: inset;\n}\n\n", ""]);
 
 // exports
 
