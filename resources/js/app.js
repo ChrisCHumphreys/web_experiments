@@ -15,7 +15,7 @@ const router = new VueRouter({
     ],
 });
 import theWelcomePage from './components/theWelcomePage.vue'
-// import dropDownComponent from './components/dropDownComponent'
+
 new Vue({
     components: {
         theWelcomePage,

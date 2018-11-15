@@ -123,7 +123,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     routes: [{ path: '/foo', component: Foo }, { path: '/bar', component: Bar }]
 });
 
-// import dropDownComponent from './components/dropDownComponent'
+
 new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     components: {
         theWelcomePage: __WEBPACK_IMPORTED_MODULE_2__components_theWelcomePage_vue___default.a
@@ -14736,7 +14736,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "theWelcomePage",
@@ -14759,9 +14758,9 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", [
-      _c("h1", { staticClass: "red" }, [_vm._v("Chris Humphreys")]),
-      _vm._v(" "),
-      _c("strong", [_vm._v("this is a test")])
+      _c("h1", { staticClass: "title is-1 has-text-grey-dark" }, [
+        _vm._v("Chris Humphreys")
+      ])
     ])
   }
 ]

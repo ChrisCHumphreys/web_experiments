@@ -1,7 +1,6 @@
 <template>
     <div>
-        <h1 class="red">Chris Humphreys</h1>
-        <strong>this is a test</strong>
+        <h1 class="title is-1 has-text-grey-dark">Chris Humphreys</h1>
     </div>
 </template>
 
