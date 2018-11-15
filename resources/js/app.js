@@ -12,9 +12,14 @@ const router = new VueRouter({
     routes: [
         {path: '/foo', component: Foo},
         {path: '/bar', component: Bar}
-    ]
+    ],
 });
-
+import theWelcomePage from './components/theWelcomePage.vue'
+// import dropDownComponent from './components/dropDownComponent'
 new Vue({
+    components: {
+        theWelcomePage,
+        // dropDownComponent,
+    },
     router
 }).$mount('#app');
