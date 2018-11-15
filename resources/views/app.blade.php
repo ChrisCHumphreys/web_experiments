@@ -12,9 +12,7 @@
 <div id="app">
         {{--<router-link to="/foo">Go to Foo</router-link>
         <router-link to="/bar">Go to Bar</router-link>--}}
-        <the-welcome-page></the-welcome-page>
-        <router-link to="/conway-checkers">Conway Checkers</router-link>
-
+    <the-welcome-page></the-welcome-page>
     <router-view></router-view>
 </div>
 <script src="dist/app.js"></script>
