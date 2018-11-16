@@ -7,6 +7,8 @@
                     <the-tile-component
                             v-for="tile in boardWidth"
                             :key="tile"
+                            :x-value="row"
+                            :y-value="tile"
                             :color="assignColorToTile(row, tile)">
                     </the-tile-component>
                 </div>
@@ -25,8 +27,8 @@
         },
         data: function () {
             return {
-                boardHeight: 100,
-                boardWidth: 100,
+                boardHeight: 10,
+                boardWidth: 10,
             }
         },
         methods: {

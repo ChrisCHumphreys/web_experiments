@@ -14922,6 +14922,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -14932,8 +14934,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            boardHeight: 100,
-            boardWidth: 100
+            boardHeight: 10,
+            boardWidth: 10
         };
     },
     methods: {
@@ -14982,7 +14984,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.square[data-v-76acc71a] {\n    width: 75px;\n    padding-bottom: 75px;\n    border-style: inset;\n}\n\n", ""]);
+exports.push([module.i, "\n.square[data-v-76acc71a] {\n    width: 75px;\n    padding-bottom: 75px;\n    border-style: inset;\n    position: relative;\n}\n.checker[data-v-76acc71a] {\n    background-color: black;\n    width: 60px;\n    height: 60px;\n    padding-bottom: auto;\n    position: absolute;\n    margin: 7px auto auto 4px;\n    border-radius: 60px;\n}\n\n", ""]);
 
 // exports
 
@@ -14998,10 +15000,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "theTileComponent",
-    props: ['color'],
+    props: ['color', 'x-value', 'y-value'],
+    data: function data() {
+        return {
+            'is-occupied': false
+        };
+    },
     computed: {
         getColor: function getColor() {
             return 'background-color: ' + this.color + ';';
@@ -15017,7 +15025,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "square", style: _vm.getColor })
+  return _c("div", { staticClass: "square", style: _vm.getColor }, [
+    _c("div", { staticClass: "checker" })
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -15049,7 +15059,11 @@ var render = function() {
             _vm._l(_vm.boardWidth, function(tile) {
               return _c("the-tile-component", {
                 key: tile,
-                attrs: { color: _vm.assignColorToTile(row, tile) }
+                attrs: {
+                  "x-value": row,
+                  "y-value": tile,
+                  color: _vm.assignColorToTile(row, tile)
+                }
               })
             })
           )
@@ -15184,7 +15198,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.red[data-v-161496eb] {\n    color: red;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -15195,6 +15209,8 @@ exports.push([module.i, "\n.red[data-v-161496eb] {\n    color: red;\n}\n", ""]);
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
 //
 //
 //
@@ -15218,8 +15234,10 @@ var render = function() {
   return _c(
     "div",
     [
-      _c("h1", { staticClass: "title is-1 has-text-grey-dark" }, [
-        _vm._v("Chris Humphreys")
+      _c("router-link", { attrs: { to: "/" } }, [
+        _c("h1", { staticClass: "title is-1 has-text-grey-dark" }, [
+          _vm._v("Chris Humphreys")
+        ])
       ]),
       _vm._v(" "),
       _c("router-link", { attrs: { to: "/conway-checkers" } }, [
