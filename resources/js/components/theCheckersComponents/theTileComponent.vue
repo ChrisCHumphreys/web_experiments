@@ -1,7 +1,7 @@
 <template>
     <div class="square"
          :style="getColor"
-         v-on:click="toggleChecker">
+         v-on:click="toggleCheckerPiece">
         <div v-if="isOccupied" class="checker"></div>
     </div>
 </template>
@@ -9,16 +9,18 @@
 <script>
     export default {
         name: "theTileComponent",
-        props: ['color', 'xValue', 'yValue'],
+        props: ['color', 'xValue', 'yValue', 'gamePhase'],
         data: function () {
             return {
                 'isOccupied': false,
             }
         },
         methods: {
-            toggleChecker: function() {
-                return this.isOccupied ? this.isOccupied = false : this.isOccupied = true;
-            }
+            toggleCheckerPiece: function() {
+                if (this.gamePhase === "setup") {
+                    return this.isOccupied ? this.isOccupied = false : this.isOccupied = true;
+                }
+            },
         },
         computed: {
             getColor: function () {

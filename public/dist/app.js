@@ -14737,7 +14737,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.game-wrapper[data-v-97c5f6ce] {\n    margin: 30px;\n}\n", ""]);
 
 // exports
 
@@ -14783,8 +14783,6 @@ module.exports = function listToStyles (parentId, list) {
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__theCheckersComponents_theBoardComponent__ = __webpack_require__(17);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__theCheckersComponents_theBoardComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__theCheckersComponents_theBoardComponent__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__theCheckersComponents_theTileComponent__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__theCheckersComponents_theTileComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__theCheckersComponents_theTileComponent__);
 //
 //
 //
@@ -14794,15 +14792,44 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "theCheckersComponent",
     components: {
-        theBoardComponent: __WEBPACK_IMPORTED_MODULE_0__theCheckersComponents_theBoardComponent___default.a,
-        theTileComponent: __WEBPACK_IMPORTED_MODULE_1__theCheckersComponents_theTileComponent___default.a
+        theBoardComponent: __WEBPACK_IMPORTED_MODULE_0__theCheckersComponents_theBoardComponent___default.a
+    },
+    data: function data() {
+        return {
+            'gamePhase': "setup"
+        };
     }
 });
 
@@ -14924,18 +14951,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "theBoardComponent",
+    props: ["gamePhase"],
     components: {
         TheTileComponent: __WEBPACK_IMPORTED_MODULE_0__theTileComponent___default.a
     },
     data: function data() {
         return {
-            boardHeight: 10,
-            boardWidth: 10
+            boardHeight: 100,
+            boardWidth: 100
         };
     },
     methods: {
@@ -15006,15 +15035,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "theTileComponent",
-    props: ['color', 'xValue', 'yValue'],
+    props: ['color', 'xValue', 'yValue', 'gamePhase'],
     data: function data() {
         return {
             'isOccupied': false
         };
     },
     methods: {
-        toggleChecker: function toggleChecker() {
-            return this.isOccupied ? this.isOccupied = false : this.isOccupied = true;
+        toggleCheckerPiece: function toggleCheckerPiece() {
+            if (this.gamePhase === "setup") {
+                return this.isOccupied ? this.isOccupied = false : this.isOccupied = true;
+            }
         }
     },
     computed: {
@@ -15037,7 +15068,7 @@ var render = function() {
     {
       staticClass: "square",
       style: _vm.getColor,
-      on: { click: _vm.toggleChecker }
+      on: { click: _vm.toggleCheckerPiece }
     },
     [_vm.isOccupied ? _c("div", { staticClass: "checker" }) : _vm._e()]
   )
@@ -15075,6 +15106,7 @@ var render = function() {
                 attrs: {
                   "x-value": row,
                   "y-value": tile,
+                  "game-phase": _vm.gamePhase,
                   color: _vm.assignColorToTile(row, tile)
                 }
               })
@@ -15103,17 +15135,81 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("h1", { staticClass: "title is-0" }, [
-        _vm._v("\n        Conway Checkers\n    ")
-      ]),
-      _vm._v(" "),
-      _c("the-board-component")
-    ],
-    1
-  )
+  return _c("div", { staticClass: "game-wrapper" }, [
+    _c("h1", { staticClass: "title is-0" }, [
+      _vm._v("\n        Conway Checkers\n    ")
+    ]),
+    _vm._v(" "),
+    _c("section", [
+      _c("div", { staticClass: "tile is-ancestor" }, [
+        _c("div", { staticClass: "tile" }, [
+          _c("div", { staticClass: "tile is-parent" }, [
+            _c("div", { staticClass: "tile is-2 notification is-primary" }, [
+              _c("div", { staticClass: "control" }, [
+                _c("p", { staticClass: "title" }, [
+                  _vm._v(
+                    "\n                                    Game Phase\n                                "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("label", { staticClass: "radio" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.gamePhase,
+                        expression: "gamePhase"
+                      }
+                    ],
+                    attrs: { type: "radio", value: "setup" },
+                    domProps: { checked: _vm._q(_vm.gamePhase, "setup") },
+                    on: {
+                      change: function($event) {
+                        _vm.gamePhase = "setup"
+                      }
+                    }
+                  }),
+                  _vm._v(
+                    "\n                                    Setup\n                                "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("label", { staticClass: "radio" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.gamePhase,
+                        expression: "gamePhase"
+                      }
+                    ],
+                    attrs: { type: "radio", value: "play" },
+                    domProps: { checked: _vm._q(_vm.gamePhase, "play") },
+                    on: {
+                      change: function($event) {
+                        _vm.gamePhase = "play"
+                      }
+                    }
+                  }),
+                  _vm._v(
+                    "\n                                    Play\n                                "
+                  )
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "section",
+      [_c("the-board-component", { attrs: { "game-phase": _vm.gamePhase } })],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

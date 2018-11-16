@@ -9,6 +9,7 @@
                             :key="tile"
                             :x-value="row"
                             :y-value="tile"
+                            :game-phase="gamePhase"
                             :color="assignColorToTile(row, tile)">
                     </the-tile-component>
                 </div>
@@ -22,13 +23,14 @@
 
     export default {
         name: "theBoardComponent",
+        props: ["gamePhase"],
         components: {
             TheTileComponent
         },
         data: function () {
             return {
-                boardHeight: 10,
-                boardWidth: 10,
+                boardHeight: 100,
+                boardWidth: 100,
             }
         },
         methods: {
