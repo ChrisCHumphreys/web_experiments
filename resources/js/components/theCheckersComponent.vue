@@ -34,7 +34,7 @@
                                     <label for="width">Width</label>
                                     <input class="input is-primary" id="width" type="text"
                                            v-model="newWidth">
-                                    <a class="button is-success" v-on:click="resetSize">Submit</a>
+                                    <a class="button is-success resize-button" v-on:click="resetSize">Resize Board</a>
                                 </div>
                             </div>
                         </article>
@@ -78,7 +78,13 @@
 </script>
 
 <style scoped>
+
     .game-wrapper {
         margin: 30px;
     }
+
+    .resize-button {
+        margin-top: 5px;
+    }
+
 </style>

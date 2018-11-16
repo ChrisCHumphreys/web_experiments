@@ -14737,7 +14737,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.game-wrapper[data-v-97c5f6ce] {\n    margin: 30px;\n}\n", ""]);
+exports.push([module.i, "\n.game-wrapper[data-v-97c5f6ce] {\n    margin: 30px;\n}\n.resize-button[data-v-97c5f6ce] {\n    margin-top: 5px;\n}\n\n", ""]);
 
 // exports
 
@@ -14990,9 +14990,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         TheTileComponent: __WEBPACK_IMPORTED_MODULE_0__theTileComponent___default.a
     },
     data: function data() {
-        return {
-            key: 0
-        };
+        return {};
     },
     methods: {
         assignColorToTile: function assignColorToTile(row, tile) {
@@ -15002,8 +15000,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return "red";
             }
         },
-        makeKey: function makeKey() {
-            this.key = this.key + 1;
+        makeKey: function makeKey(row, tile) {
+            return row.toString() + ', ' + tile.toString();
         }
     }
 });
@@ -15132,7 +15130,7 @@ var render = function() {
             { staticClass: "level-item" },
             _vm._l(_vm.boardWidth, function(tile) {
               return _c("the-tile-component", {
-                key: _vm.key,
+                key: _vm.makeKey(row, tile),
                 attrs: {
                   "x-value": row,
                   "y-value": tile,
@@ -15297,10 +15295,10 @@ var render = function() {
                     _c(
                       "a",
                       {
-                        staticClass: "button is-success",
+                        staticClass: "button is-success resize-button",
                         on: { click: _vm.resetSize }
                       },
-                      [_vm._v("Submit")]
+                      [_vm._v("Resize Board")]
                     )
                   ])
                 ])

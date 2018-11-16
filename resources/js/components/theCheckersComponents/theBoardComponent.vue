@@ -8,7 +8,7 @@
                             v-for="tile in boardWidth"
                             :x-value="row"
                             :y-value="tile"
-                            :key="key"
+                            :key="makeKey(row, tile)"
                             :game-phase="gamePhase"
                             :color="assignColorToTile(row, tile)">
                     </the-tile-component>
@@ -29,7 +29,6 @@
         },
         data: function () {
             return {
-                key: 0,
             }
         },
         methods: {
@@ -40,8 +39,8 @@
                     return "red";
                 }
             },
-            makeKey: function () {
-                this.key = this.key + 1;
+            makeKey: function (row, tile) {
+                return (row.toString() + ', ' + tile.toString())
             }
         },
     }
