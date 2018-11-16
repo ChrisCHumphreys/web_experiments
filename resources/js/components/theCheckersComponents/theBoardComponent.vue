@@ -1,14 +1,14 @@
 <template>
     <div class="columns is-h-scrollable">
         <div class="column">
-            <div class="is-multiline is is-centered"
-                 v-for="row in this.boardHeight">
+            <div class="is-multiline is-centered"
+                 v-for="row in boardHeight">
                 <div class="level-item">
                     <the-tile-component
                             v-for="tile in boardWidth"
-                            :key="tile"
                             :x-value="row"
                             :y-value="tile"
+                            :key="key"
                             :game-phase="gamePhase"
                             :color="assignColorToTile(row, tile)">
                     </the-tile-component>
@@ -23,24 +23,26 @@
 
     export default {
         name: "theBoardComponent",
-        props: ["gamePhase"],
+        props: ["gamePhase", "boardHeight", "boardWidth"],
         components: {
             TheTileComponent
         },
         data: function () {
             return {
-                boardHeight: 100,
-                boardWidth: 100,
+                key: 0,
             }
         },
         methods: {
-            assignColorToTile: (row, tile) => {
+            assignColorToTile: function (row, tile) {
                 if ((row + tile) % 2 === 0) {
                     return "blue";
                 } else {
                     return "red";
                 }
             },
+            makeKey: function () {
+                this.key = this.key + 1;
+            }
         },
     }
 </script>

@@ -14818,6 +14818,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -14828,8 +14846,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            'gamePhase': "setup"
+            'gamePhase': "setup",
+            'boardHeight': 10,
+            'boardWidth': 10,
+            'newHeight': 10,
+            'newWidth': 10
         };
+    },
+    methods: {
+        resetSize: function resetSize() {
+            this.boardHeight = parseInt(this.newHeight, 10);
+            this.boardWidth = parseInt(this.newWidth, 10);
+        }
     }
 });
 
@@ -14957,14 +14985,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "theBoardComponent",
-    props: ["gamePhase"],
+    props: ["gamePhase", "boardHeight", "boardWidth"],
     components: {
         TheTileComponent: __WEBPACK_IMPORTED_MODULE_0__theTileComponent___default.a
     },
     data: function data() {
         return {
-            boardHeight: 100,
-            boardWidth: 100
+            key: 0
         };
     },
     methods: {
@@ -14974,6 +15001,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             } else {
                 return "red";
             }
+        },
+        makeKey: function makeKey() {
+            this.key = this.key + 1;
         }
     }
 });
@@ -15095,14 +15125,14 @@ var render = function() {
     _c(
       "div",
       { staticClass: "column" },
-      _vm._l(this.boardHeight, function(row) {
-        return _c("div", { staticClass: "is-multiline is is-centered" }, [
+      _vm._l(_vm.boardHeight, function(row) {
+        return _c("div", { staticClass: "is-multiline is-centered" }, [
           _c(
             "div",
             { staticClass: "level-item" },
             _vm._l(_vm.boardWidth, function(tile) {
               return _c("the-tile-component", {
-                key: tile,
+                key: _vm.key,
                 attrs: {
                   "x-value": row,
                   "y-value": tile,
@@ -15136,69 +15166,146 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "game-wrapper" }, [
-    _c("h1", { staticClass: "title is-0" }, [
+    _c("h1", { staticClass: "title" }, [
       _vm._v("\n        Conway Checkers\n    ")
     ]),
     _vm._v(" "),
     _c("section", [
       _c("div", { staticClass: "tile is-ancestor" }, [
-        _c("div", { staticClass: "tile" }, [
-          _c("div", { staticClass: "tile is-parent" }, [
-            _c("div", { staticClass: "tile is-2 notification is-primary" }, [
-              _c("div", { staticClass: "control" }, [
-                _c("p", { staticClass: "title" }, [
-                  _vm._v(
-                    "\n                                    Game Phase\n                                "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("label", { staticClass: "radio" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.gamePhase,
-                        expression: "gamePhase"
+        _c("div", { staticClass: "tile is-12" }, [
+          _c("div", { staticClass: "tile is-2 is-parent" }, [
+            _c(
+              "article",
+              { staticClass: "tile is-child notification is-primary" },
+              [
+                _c("div", { staticClass: "control" }, [
+                  _c("p", { staticClass: "title" }, [
+                    _vm._v(
+                      "\n                                Game Phase\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "radio" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.gamePhase,
+                          expression: "gamePhase"
+                        }
+                      ],
+                      attrs: { type: "radio", value: "setup" },
+                      domProps: { checked: _vm._q(_vm.gamePhase, "setup") },
+                      on: {
+                        change: function($event) {
+                          _vm.gamePhase = "setup"
+                        }
                       }
-                    ],
-                    attrs: { type: "radio", value: "setup" },
-                    domProps: { checked: _vm._q(_vm.gamePhase, "setup") },
-                    on: {
-                      change: function($event) {
-                        _vm.gamePhase = "setup"
+                    }),
+                    _vm._v(
+                      "\n                                Setup\n                            "
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("label", { staticClass: "radio" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.gamePhase,
+                          expression: "gamePhase"
+                        }
+                      ],
+                      attrs: { type: "radio", value: "play" },
+                      domProps: { checked: _vm._q(_vm.gamePhase, "play") },
+                      on: {
+                        change: function($event) {
+                          _vm.gamePhase = "play"
+                        }
                       }
-                    }
-                  }),
-                  _vm._v(
-                    "\n                                    Setup\n                                "
-                  )
-                ]),
-                _vm._v(" "),
-                _c("label", { staticClass: "radio" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.gamePhase,
-                        expression: "gamePhase"
-                      }
-                    ],
-                    attrs: { type: "radio", value: "play" },
-                    domProps: { checked: _vm._q(_vm.gamePhase, "play") },
-                    on: {
-                      change: function($event) {
-                        _vm.gamePhase = "play"
-                      }
-                    }
-                  }),
-                  _vm._v(
-                    "\n                                    Play\n                                "
-                  )
+                    }),
+                    _vm._v(
+                      "\n                                Play\n                            "
+                    )
+                  ])
                 ])
-              ])
-            ])
+              ]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "tile is-2 is-parent" }, [
+            _c(
+              "article",
+              { staticClass: "tile is-child notification is-primary" },
+              [
+                _c("p", { staticClass: "title" }, [_vm._v("Board Size")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "field" }, [
+                  _c("div", { staticClass: "control" }, [
+                    _c("label", { attrs: { for: "height" } }, [
+                      _vm._v("Height")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.newHeight,
+                          expression: "newHeight"
+                        }
+                      ],
+                      staticClass: "input is-primary",
+                      attrs: { id: "height", type: "text" },
+                      domProps: { value: _vm.newHeight },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.newHeight = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("label", { attrs: { for: "width" } }, [_vm._v("Width")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.newWidth,
+                          expression: "newWidth"
+                        }
+                      ],
+                      staticClass: "input is-primary",
+                      attrs: { id: "width", type: "text" },
+                      domProps: { value: _vm.newWidth },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.newWidth = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "button is-success",
+                        on: { click: _vm.resetSize }
+                      },
+                      [_vm._v("Submit")]
+                    )
+                  ])
+                ])
+              ]
+            )
           ])
         ])
       ])
@@ -15206,7 +15313,15 @@ var render = function() {
     _vm._v(" "),
     _c(
       "section",
-      [_c("the-board-component", { attrs: { "game-phase": _vm.gamePhase } })],
+      [
+        _c("the-board-component", {
+          attrs: {
+            "game-phase": _vm.gamePhase,
+            "board-height": _vm.boardHeight,
+            "board-width": _vm.boardWidth
+          }
+        })
+      ],
       1
     )
   ])
