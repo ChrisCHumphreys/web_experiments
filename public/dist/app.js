@@ -15001,14 +15001,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "theTileComponent",
-    props: ['color', 'x-value', 'y-value'],
+    props: ['color', 'xValue', 'yValue'],
     data: function data() {
         return {
-            'is-occupied': false
+            'isOccupied': false
         };
+    },
+    methods: {
+        toggleChecker: function toggleChecker() {
+            return this.isOccupied ? this.isOccupied = false : this.isOccupied = true;
+        }
     },
     computed: {
         getColor: function getColor() {
@@ -15025,9 +15032,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "square", style: _vm.getColor }, [
-    _c("div", { staticClass: "checker" })
-  ])
+  return _c(
+    "div",
+    {
+      staticClass: "square",
+      style: _vm.getColor,
+      on: { click: _vm.toggleChecker }
+    },
+    [_vm.isOccupied ? _c("div", { staticClass: "checker" }) : _vm._e()]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

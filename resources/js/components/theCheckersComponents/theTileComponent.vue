@@ -1,22 +1,29 @@
 <template>
-    <div class="square" :style="getColor">
-        <div class="checker"></div>
+    <div class="square"
+         :style="getColor"
+         v-on:click="toggleChecker">
+        <div v-if="isOccupied" class="checker"></div>
     </div>
 </template>
 
 <script>
     export default {
         name: "theTileComponent",
-        props: ['color', 'x-value', 'y-value'],
+        props: ['color', 'xValue', 'yValue'],
         data: function () {
             return {
-                'is-occupied': false,
+                'isOccupied': false,
+            }
+        },
+        methods: {
+            toggleChecker: function() {
+                return this.isOccupied ? this.isOccupied = false : this.isOccupied = true;
             }
         },
         computed: {
-            getColor: function ()  {
+            getColor: function () {
                 return 'background-color: ' + this.color + ';'
-            }
+            },
         }
     }
 </script>
@@ -28,6 +35,7 @@
         border-style: inset;
         position: relative;
     }
+
     .checker {
         background-color: black;
         width: 60px;
