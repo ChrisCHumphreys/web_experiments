@@ -73,6 +73,7 @@
                 this.boardHeight = parseInt(this.newHeight, 10);
                 this.boardWidth = parseInt(this.newWidth, 10);
             },
+
         }
     }
 </script>

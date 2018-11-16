@@ -10,7 +10,10 @@
                             :y-value="tile"
                             :key="makeKey(row, tile)"
                             :game-phase="gamePhase"
-                            :color="assignColorToTile(row, tile)">
+                            :color="assignColorToTile(row, tile)"
+                            v-on:move-attempted="validateMove"
+                            v-on:add-piece="addPieceToCheckersArray"
+                            v-on:remove-piece="removeFromCheckersArray">
                     </the-tile-component>
                 </div>
             </div>
@@ -29,6 +32,9 @@
         },
         data: function () {
             return {
+                firstSquareClicked: false,
+                secondSquareClicked: false,
+                checkersArray: [],
             }
         },
         methods: {
@@ -41,6 +47,22 @@
             },
             makeKey: function (row, tile) {
                 return (row.toString() + ', ' + tile.toString())
+            },
+            validateMove: function (tileData) {
+                console.log(tileData.row)
+            },
+            addPieceToCheckersArray(location) {
+                this.checkersArray.push(location);
+            },
+            removeFromCheckersArray(location) {
+                let filtered = this.checkersArray.filter(function(item){
+                    let locationString = item.x.toString() + ', ' + item.y.toString();
+                    if (locationString != location) {
+                        return item;
+                    }
+                });
+                this.checkersArray = filtered;
+                // this.checkersArray.remove(location);
             }
         },
     }

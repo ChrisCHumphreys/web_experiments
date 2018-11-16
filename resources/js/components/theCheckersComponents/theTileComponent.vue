@@ -1,7 +1,7 @@
 <template>
     <div class="square"
          :style="getColor"
-         v-on:click="toggleCheckerPiece">
+         v-on:click="updateSquare">
         <div v-if="isOccupied" class="checker"></div>
     </div>
 </template>
@@ -16,9 +16,20 @@
             }
         },
         methods: {
-            toggleCheckerPiece: function() {
-                if (this.gamePhase === "setup") {
-                    return this.isOccupied ? this.isOccupied = false : this.isOccupied = true;
+            updateSquare: function() {
+                if (this.gamePhase === "setup")
+                    if (this.isOccupied) {
+                        this.$emit('remove-piece', this.yValue + ', ' + this.xValue);
+                        this.isOccupied = false;
+                    } else {
+                        this.$emit('add-piece', { x: this.yValue, y: this.xValue});
+                        this.isOccupied = true;
+                } else {
+                    this.$emit('move-attempted', {
+                        "column": this.xValue,
+                        "row": this.yValue,
+                        "isOccupied": this.isOccupied,
+                    })
                 }
             },
         },
