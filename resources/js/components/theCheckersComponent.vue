@@ -46,7 +46,10 @@
             <the-board-component
                     :game-phase="gamePhase"
                     :board-height="boardHeight"
-                    :board-width="boardWidth"/>
+                    :board-width="boardWidth"
+                    :occupied-squares="occupiedSquares"
+                    v-on:add-piece="addPieceToCheckersArray"
+                    v-on:remove-piece="removeFromCheckersArray"/>
         </section>
     </div>
 </template>
@@ -66,13 +69,26 @@
                 'boardWidth': 10,
                 'newHeight': 10,
                 'newWidth': 10,
+                'occupiedSquares': []
             }
         },
         methods: {
             resetSize() {
                 this.boardHeight = parseInt(this.newHeight, 10);
                 this.boardWidth = parseInt(this.newWidth, 10);
+                this.occupiedSquares = [];
             },
+            addPieceToCheckersArray(location) {
+                this.occupiedSquares.push(location);
+            },
+            removeFromCheckersArray(location) {
+                let newOccupied = this.occupiedSquares.filter(function(item){
+                    if ((item.x !== location.x) || (item.y !== location.y)) {
+                        return item;
+                    }
+                });
+                this.occupiedSquares = newOccupied;
+            }
 
         }
     }

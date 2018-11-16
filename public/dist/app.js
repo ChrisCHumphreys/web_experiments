@@ -14785,6 +14785,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -14799,13 +14802,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             'boardHeight': 10,
             'boardWidth': 10,
             'newHeight': 10,
-            'newWidth': 10
+            'newWidth': 10,
+            'occupiedSquares': []
         };
     },
     methods: {
         resetSize: function resetSize() {
             this.boardHeight = parseInt(this.newHeight, 10);
             this.boardWidth = parseInt(this.newWidth, 10);
+            this.occupiedSquares = [];
+        },
+        addPieceToCheckersArray: function addPieceToCheckersArray(location) {
+            this.occupiedSquares.push(location);
+        },
+        removeFromCheckersArray: function removeFromCheckersArray(location) {
+            var newOccupied = this.occupiedSquares.filter(function (item) {
+                if (item.x !== location.x || item.y !== location.y) {
+                    return item;
+                }
+            });
+            this.occupiedSquares = newOccupied;
         }
     }
 });
@@ -14932,21 +14948,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "theBoardComponent",
-    props: ["gamePhase", "boardHeight", "boardWidth"],
+    props: ["gamePhase", "boardHeight", "boardWidth", "occupiedSquares"],
     components: {
         TheTileComponent: __WEBPACK_IMPORTED_MODULE_0__theTileComponent___default.a
     },
     data: function data() {
-        return {
-            firstSquareClicked: false,
-            secondSquareClicked: false,
-            checkersArray: []
-        };
+        return {};
     },
     methods: {
         assignColorToTile: function assignColorToTile(row, tile) {
@@ -14962,18 +14975,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         validateMove: function validateMove(tileData) {
             console.log(tileData.row);
         },
-        addPieceToCheckersArray: function addPieceToCheckersArray(location) {
-            this.checkersArray.push(location);
+        broadcastAddPiece: function broadcastAddPiece(location) {
+            this.$emit('add-piece', location);
         },
-        removeFromCheckersArray: function removeFromCheckersArray(location) {
-            var filtered = this.checkersArray.filter(function (item) {
-                var locationString = item.x.toString() + ', ' + item.y.toString();
-                if (locationString != location) {
-                    return item;
+        broadcastRemovePiece: function broadcastRemovePiece(location) {
+            this.$emit('remove-piece', location);
+        },
+        checkIfOccupied: function checkIfOccupied(tile, row) {
+            var hasPiece = false;
+            this.occupiedSquares.forEach(function (item) {
+                if (tile == item.x && row == item.y) {
+                    hasPiece = true;
                 }
             });
-            this.checkersArray = filtered;
-            // this.checkersArray.remove(location);
+            return hasPiece;
         }
     }
 });
@@ -15086,21 +15101,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "theTileComponent",
-    props: ['color', 'xValue', 'yValue', 'gamePhase'],
+    props: ['color', 'xValue', 'yValue', 'gamePhase', 'isOccupied'],
     data: function data() {
         return {
-            'isOccupied': false
+            // 'showPiece': false,
         };
     },
     methods: {
         updateSquare: function updateSquare() {
             if (this.gamePhase === "setup") {
                 if (this.isOccupied) {
-                    this.$emit('remove-piece', this.yValue + ', ' + this.xValue);
-                    this.isOccupied = false;
+                    this.$emit('remove-piece', { x: this.xValue, y: this.yValue });
+                    // this.isOccupied = false;
                 } else {
-                    this.$emit('add-piece', { x: this.yValue, y: this.xValue });
-                    this.isOccupied = true;
+                    this.$emit('add-piece', { x: this.xValue, y: this.yValue });
+                    // this.isOccupied = true;
                 }
             } else {
                 this.$emit('move-attempted', {
@@ -15167,15 +15182,16 @@ var render = function() {
               return _c("the-tile-component", {
                 key: _vm.makeKey(row, tile),
                 attrs: {
-                  "x-value": row,
-                  "y-value": tile,
+                  "x-value": tile,
+                  "y-value": row,
                   "game-phase": _vm.gamePhase,
-                  color: _vm.assignColorToTile(row, tile)
+                  color: _vm.assignColorToTile(row, tile),
+                  "is-occupied": _vm.checkIfOccupied(tile, row)
                 },
                 on: {
                   "move-attempted": _vm.validateMove,
-                  "add-piece": _vm.addPieceToCheckersArray,
-                  "remove-piece": _vm.removeFromCheckersArray
+                  "add-piece": _vm.broadcastAddPiece,
+                  "remove-piece": _vm.broadcastRemovePiece
                 }
               })
             })
@@ -15356,7 +15372,12 @@ var render = function() {
           attrs: {
             "game-phase": _vm.gamePhase,
             "board-height": _vm.boardHeight,
-            "board-width": _vm.boardWidth
+            "board-width": _vm.boardWidth,
+            "occupied-squares": _vm.occupiedSquares
+          },
+          on: {
+            "add-piece": _vm.addPieceToCheckersArray,
+            "remove-piece": _vm.removeFromCheckersArray
           }
         })
       ],

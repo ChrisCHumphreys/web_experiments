@@ -6,14 +6,15 @@
                 <div class="level-item">
                     <the-tile-component
                             v-for="tile in boardWidth"
-                            :x-value="row"
-                            :y-value="tile"
+                            :x-value="tile"
+                            :y-value="row"
                             :key="makeKey(row, tile)"
                             :game-phase="gamePhase"
                             :color="assignColorToTile(row, tile)"
+                            :is-occupied="checkIfOccupied(tile, row)"
                             v-on:move-attempted="validateMove"
-                            v-on:add-piece="addPieceToCheckersArray"
-                            v-on:remove-piece="removeFromCheckersArray">
+                            v-on:add-piece="broadcastAddPiece"
+                            v-on:remove-piece="broadcastRemovePiece">
                     </the-tile-component>
                 </div>
             </div>
@@ -26,15 +27,12 @@
 
     export default {
         name: "theBoardComponent",
-        props: ["gamePhase", "boardHeight", "boardWidth"],
+        props: ["gamePhase", "boardHeight", "boardWidth", "occupiedSquares"],
         components: {
             TheTileComponent
         },
         data: function () {
             return {
-                firstSquareClicked: false,
-                secondSquareClicked: false,
-                checkersArray: [],
             }
         },
         methods: {
@@ -51,18 +49,20 @@
             validateMove: function (tileData) {
                 console.log(tileData.row)
             },
-            addPieceToCheckersArray(location) {
-                this.checkersArray.push(location);
+            broadcastAddPiece(location) {
+                this.$emit('add-piece', location);
             },
-            removeFromCheckersArray(location) {
-                let filtered = this.checkersArray.filter(function(item){
-                    let locationString = item.x.toString() + ', ' + item.y.toString();
-                    if (locationString != location) {
-                        return item;
+            broadcastRemovePiece(location) {
+                this.$emit('remove-piece', location);
+            },
+            checkIfOccupied(tile, row) {
+                let hasPiece = false;
+                this.occupiedSquares.forEach(function(item) {
+                    if (tile == item.x && row == item.y) {
+                        hasPiece =  true;
                     }
                 });
-                this.checkersArray = filtered;
-                // this.checkersArray.remove(location);
+                return hasPiece;
             }
         },
     }
