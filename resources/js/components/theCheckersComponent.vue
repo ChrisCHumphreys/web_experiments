@@ -129,16 +129,24 @@
             },
             validateAndMakeBeginningMove(tileBeingChecked) {
                 if (this.tileIsOccupied(tileBeingChecked)) {
-                    this.moveBeginning.x = tileBeingChecked.x;
-                    this.moveBeginning.y = tileBeingChecked.y;
+                    this.setMoveBegin(tileBeingChecked.x, tileBeingChecked.y)
                 } else {
-                    this.moveBeginning.x = -1;
-                    this.moveBeginning.y = -1;
+                    this.setMoveBegin(-1, -1);
                     this.createError('Invalid Move - Square is Empty')
                 }
             },
             validateAndMakeSecondMove(tileBeingChecked) {
-                let checkerFound = false;
+                if (this.tileIsOccupied(tileBeingChecked)) {
+                    this.resetMove();
+                    this.createError('Invalid Move - Must Move To An Empty Square');
+                } else {
+                    this.setMoveEnd(tileBeingChecked.x, tileBeingChecked.y);
+                    if (this.moveIsValid()) {
+                        // make move
+                    } else {
+                        // reset variables.
+                    }
+                }
             },
             tileIsOccupied(tileBeingChecked) {
                 let checkerFound = false;
@@ -148,6 +156,52 @@
                     }
                 });
                 return checkerFound;
+            },
+            setMoveBegin(x, y) {
+              this.moveBeginning.x = x;
+              this.moveBeginning.y = y;
+            },
+            setMoveEnd(x, y) {
+                this.moveEnd.x = x;
+                this.moveEnd.y = y;
+            },
+            isValidDistance() {
+                let distanceMoved = 0;
+                if(this.moveBeginning.x === this.moveEnd.x) {
+                    if (this.moveBeginning.y - this.moveEnd.y < 0) {
+                        distanceMoved = (this.moveBeginning.y - this.moveEnd.y) * -1;
+                    } else {
+                        distanceMoved = (this.moveBeginning.y - this.moveEnd.y);
+                    }
+
+                    console.log("distance moved: " + distanceMoved);
+                    if (distanceMoved !== 2) {
+                        return false;
+                    }
+                }
+                if(this.moveBeginning.y === this.moveEnd.y) {
+                    if (this.moveBeginning.x - this.moveEnd.x < 0) {
+                        distanceMoved = (this.moveBeginning.x - this.moveEnd.x) * -1;
+                    } else {
+                        distanceMoved = (this.moveBeginning.x - this.moveEnd.x);
+                    }
+
+                    console.log("distance moved: " + distanceMoved);
+                    if (distanceMoved !== 2) {
+                        return false;
+                    }
+                }
+                return true;
+            },
+            moveIsValid() {
+                if (!this.isValidDistance()) {
+                    this.createError('Invalid Distance!');
+                    return false;
+                }
+            },
+            resetMove() {
+                this.setMoveBegin(-1, -1);
+                this.setMoveEnd(-1, -1);
             },
             createError(errorText) {
                 this.errorText = errorText;
