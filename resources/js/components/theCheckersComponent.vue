@@ -34,10 +34,19 @@
                                     <label for="width">Width</label>
                                     <input class="input is-primary" id="width" type="text"
                                            v-model="newWidth">
-                                    <a class="button is-success resize-button" v-on:click="resetSize">Resize Board</a>
+                                    <a class="button is-success resize-button" v-on:click="resetSize">Resize/Clear Board</a>
                                 </div>
                             </div>
                         </article>
+                    </div>
+                </div>
+            </div>
+            <div class="tile is-ancestor" v-if="showError">
+                <div class="tile is-12">
+                    <div class="tile is-parent">
+                        <div class="tile is-12 notification is-danger">
+                            <p>{{ errorText }}</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -49,7 +58,8 @@
                     :board-width="boardWidth"
                     :occupied-squares="occupiedSquares"
                     v-on:add-piece="addPieceToCheckersArray"
-                    v-on:remove-piece="removeFromCheckersArray"/>
+                    v-on:remove-piece="removeFromCheckersArray"
+                    v-on:move-attempted="validateAndExecuteMove"/>
         </section>
     </div>
 </template>
@@ -69,7 +79,17 @@
                 'boardWidth': 10,
                 'newHeight': 10,
                 'newWidth': 10,
-                'occupiedSquares': []
+                'occupiedSquares': [],
+                'errorText': "Unknown Error",
+                'showError': false,
+                'moveBeginning': {
+                    x: -1,
+                    y: -1,
+                },
+                'moveEnd': {
+                    x: -1,
+                    y: -1,
+                },
             }
         },
         methods: {
@@ -88,8 +108,55 @@
                     }
                 });
                 this.occupiedSquares = newOccupied;
+            },
+            validateAndExecuteMove(moveDetails) {
+                this.clearErrors();
+                let tileBeingChecked = {};
+                tileBeingChecked.x = moveDetails.column;
+                tileBeingChecked.y = moveDetails.row;
+                // if first move
+                    // validate square has a piece
+                        // store if does, error and reset if not
+                // if second move
+                    // determine if move is legal
+                        // if possible -> move
+                        // else reset moves -> error
+                if (this.moveBeginning.x === -1) {
+                    this.validateAndMakeBeginningMove(tileBeingChecked);
+                } else {
+                    this.validateAndMakeSecondMove(tileBeingChecked);
+                }
+            },
+            validateAndMakeBeginningMove(tileBeingChecked) {
+                if (this.tileIsOccupied(tileBeingChecked)) {
+                    this.moveBeginning.x = tileBeingChecked.x;
+                    this.moveBeginning.y = tileBeingChecked.y;
+                } else {
+                    this.moveBeginning.x = -1;
+                    this.moveBeginning.y = -1;
+                    this.createError('Invalid Move - Square is Empty')
+                }
+            },
+            validateAndMakeSecondMove(tileBeingChecked) {
+                let checkerFound = false;
+            },
+            tileIsOccupied(tileBeingChecked) {
+                let checkerFound = false;
+                this.occupiedSquares.forEach(knownTile => {
+                    if (knownTile.x === tileBeingChecked.x && knownTile.y === tileBeingChecked.y) {
+                        checkerFound = true;
+                    }
+                });
+                return checkerFound;
+            },
+            createError(errorText) {
+                this.errorText = errorText;
+                this.showError = true;
+            },
+            clearErrors() {
+                this.errorText = "Unknown Error";
+                this.showError = false;
             }
-
         }
     }
 </script>

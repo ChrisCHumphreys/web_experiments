@@ -14788,6 +14788,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -14803,7 +14813,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             'boardWidth': 10,
             'newHeight': 10,
             'newWidth': 10,
-            'occupiedSquares': []
+            'occupiedSquares': [],
+            'errorText': "Unknown Error",
+            'showError': false,
+            'moveBeginning': {
+                x: -1,
+                y: -1
+            },
+            'moveEnd': {
+                x: -1,
+                y: -1
+            }
         };
     },
     methods: {
@@ -14822,6 +14842,54 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             });
             this.occupiedSquares = newOccupied;
+        },
+        validateAndExecuteMove: function validateAndExecuteMove(moveDetails) {
+            this.clearErrors();
+            var tileBeingChecked = {};
+            tileBeingChecked.x = moveDetails.column;
+            tileBeingChecked.y = moveDetails.row;
+            // if first move
+            // validate square has a piece
+            // store if does, error and reset if not
+            // if second move
+            // determine if move is legal
+            // if possible -> move
+            // else reset moves -> error
+            if (this.moveBeginning.x === -1) {
+                this.validateAndMakeBeginningMove(tileBeingChecked);
+            } else {
+                this.validateAndMakeSecondMove(tileBeingChecked);
+            }
+        },
+        validateAndMakeBeginningMove: function validateAndMakeBeginningMove(tileBeingChecked) {
+            if (this.tileIsOccupied(tileBeingChecked)) {
+                this.moveBeginning.x = tileBeingChecked.x;
+                this.moveBeginning.y = tileBeingChecked.y;
+            } else {
+                this.moveBeginning.x = -1;
+                this.moveBeginning.y = -1;
+                this.createError('Invalid Move - Square is Empty');
+            }
+        },
+        validateAndMakeSecondMove: function validateAndMakeSecondMove(tileBeingChecked) {
+            var checkerFound = false;
+        },
+        tileIsOccupied: function tileIsOccupied(tileBeingChecked) {
+            var checkerFound = false;
+            this.occupiedSquares.forEach(function (knownTile) {
+                if (knownTile.x === tileBeingChecked.x && knownTile.y === tileBeingChecked.y) {
+                    checkerFound = true;
+                }
+            });
+            return checkerFound;
+        },
+        createError: function createError(errorText) {
+            this.errorText = errorText;
+            this.showError = true;
+        },
+        clearErrors: function clearErrors() {
+            this.errorText = "Unknown Error";
+            this.showError = false;
         }
     }
 });
@@ -14972,14 +15040,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         makeKey: function makeKey(row, tile) {
             return row.toString() + ', ' + tile.toString();
         },
-        validateMove: function validateMove(tileData) {
-            console.log(tileData.row);
-        },
         broadcastAddPiece: function broadcastAddPiece(location) {
             this.$emit('add-piece', location);
         },
         broadcastRemovePiece: function broadcastRemovePiece(location) {
             this.$emit('remove-piece', location);
+        },
+        broadcastMoveAttempted: function broadcastMoveAttempted(moveDetails) {
+            this.$emit('move-attempted', moveDetails);
         },
         checkIfOccupied: function checkIfOccupied(tile, row) {
             var hasPiece = false;
@@ -15103,9 +15171,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: "theTileComponent",
     props: ['color', 'xValue', 'yValue', 'gamePhase', 'isOccupied'],
     data: function data() {
-        return {
-            // 'showPiece': false,
-        };
+        return {};
     },
     methods: {
         updateSquare: function updateSquare() {
@@ -15189,9 +15255,9 @@ var render = function() {
                   "is-occupied": _vm.checkIfOccupied(tile, row)
                 },
                 on: {
-                  "move-attempted": _vm.validateMove,
                   "add-piece": _vm.broadcastAddPiece,
-                  "remove-piece": _vm.broadcastRemovePiece
+                  "remove-piece": _vm.broadcastRemovePiece,
+                  "move-attempted": _vm.broadcastMoveAttempted
                 }
               })
             })
@@ -15354,7 +15420,7 @@ var render = function() {
                         staticClass: "button is-success resize-button",
                         on: { click: _vm.resetSize }
                       },
-                      [_vm._v("Resize Board")]
+                      [_vm._v("Resize/Clear Board")]
                     )
                   ])
                 ])
@@ -15362,7 +15428,21 @@ var render = function() {
             )
           ])
         ])
-      ])
+      ]),
+      _vm._v(" "),
+      _vm.showError
+        ? _c("div", { staticClass: "tile is-ancestor" }, [
+            _c("div", { staticClass: "tile is-12" }, [
+              _c("div", { staticClass: "tile is-parent" }, [
+                _c(
+                  "div",
+                  { staticClass: "tile is-12 notification is-danger" },
+                  [_c("p", [_vm._v(_vm._s(_vm.errorText))])]
+                )
+              ])
+            ])
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c(
@@ -15377,7 +15457,8 @@ var render = function() {
           },
           on: {
             "add-piece": _vm.addPieceToCheckersArray,
-            "remove-piece": _vm.removeFromCheckersArray
+            "remove-piece": _vm.removeFromCheckersArray,
+            "move-attempted": _vm.validateAndExecuteMove
           }
         })
       ],

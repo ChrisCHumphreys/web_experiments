@@ -12,18 +12,18 @@
         props: ['color', 'xValue', 'yValue', 'gamePhase', 'isOccupied'],
         data: function () {
             return {
-                // 'showPiece': false,
             }
         },
         methods: {
             updateSquare: function() {
-                if (this.gamePhase === "setup")
+                if (this.gamePhase === "setup") {
                     if (this.isOccupied) {
                         this.$emit('remove-piece', {x: this.xValue, y: this.yValue});
                         // this.isOccupied = false;
                     } else {
-                        this.$emit('add-piece', { x: this.xValue, y: this.yValue});
+                        this.$emit('add-piece', {x: this.xValue, y: this.yValue});
                         // this.isOccupied = true;
+                    }
                 } else {
                     this.$emit('move-attempted', {
                         "column": this.xValue,

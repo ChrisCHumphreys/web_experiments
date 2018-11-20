@@ -12,9 +12,9 @@
                             :game-phase="gamePhase"
                             :color="assignColorToTile(row, tile)"
                             :is-occupied="checkIfOccupied(tile, row)"
-                            v-on:move-attempted="validateMove"
                             v-on:add-piece="broadcastAddPiece"
-                            v-on:remove-piece="broadcastRemovePiece">
+                            v-on:remove-piece="broadcastRemovePiece"
+                            v-on:move-attempted="broadcastMoveAttempted">
                     </the-tile-component>
                 </div>
             </div>
@@ -46,14 +46,14 @@
             makeKey: function (row, tile) {
                 return (row.toString() + ', ' + tile.toString())
             },
-            validateMove: function (tileData) {
-                console.log(tileData.row)
-            },
             broadcastAddPiece(location) {
                 this.$emit('add-piece', location);
             },
             broadcastRemovePiece(location) {
                 this.$emit('remove-piece', location);
+            },
+            broadcastMoveAttempted(moveDetails) {
+                this.$emit('move-attempted', moveDetails);
             },
             checkIfOccupied(tile, row) {
                 let hasPiece = false;
