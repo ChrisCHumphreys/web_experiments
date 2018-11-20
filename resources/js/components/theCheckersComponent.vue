@@ -142,8 +142,10 @@
                 } else {
                     this.setMoveEnd(tileBeingChecked.x, tileBeingChecked.y);
                     if (this.moveIsValid()) {
+                        console.log('valid move');
                         // make move
                     } else {
+                        this.resetMove();
                         // reset variables.
                     }
                 }
@@ -173,8 +175,6 @@
                     } else {
                         distanceMoved = (this.moveBeginning.y - this.moveEnd.y);
                     }
-
-                    console.log("distance moved: " + distanceMoved);
                     if (distanceMoved !== 2) {
                         return false;
                     }
@@ -185,9 +185,34 @@
                     } else {
                         distanceMoved = (this.moveBeginning.x - this.moveEnd.x);
                     }
-
-                    console.log("distance moved: " + distanceMoved);
                     if (distanceMoved !== 2) {
+                        return false;
+                    }
+                }
+                return true;
+            },
+            isJumping() {
+                if (this.moveBeginning.x < this.moveEnd.x) {
+                    let tileToJump = {x: this.moveBeginning.x + 1, y: this.moveBeginning.y};
+                    if (!this.tileIsOccupied(tileToJump)) {
+                        return false;
+                    }
+                }
+                if (this.moveBeginning.x > this.moveEnd.x) {
+                    let tileToJump = {x: this.moveBeginning.x - 1, y: this.moveBeginning.y};
+                    if (!this.tileIsOccupied(tileToJump)) {
+                        return false;
+                    }
+                }
+                if (this.moveBeginning.y < this.moveEnd.y) {
+                    let tileToJump = {x: this.moveBeginning.x, y: this.moveBeginning.y + 1};
+                    if (!this.tileIsOccupied(tileToJump)) {
+                        return false;
+                    }
+                }
+                if (this.moveBeginning.y > this.moveEnd.y) {
+                    let tileToJump = {x: this.moveBeginning.x, y: this.moveBeginning.y - 1};
+                    if (!this.tileIsOccupied(tileToJump)) {
                         return false;
                     }
                 }
@@ -196,6 +221,10 @@
             moveIsValid() {
                 if (!this.isValidDistance()) {
                     this.createError('Invalid Distance!');
+                    return false;
+                }
+                if (!this.isJumping()) {
+                    this.createError('Must Jump another Piece');
                     return false;
                 }
             },

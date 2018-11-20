@@ -14876,10 +14876,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             } else {
                 this.setMoveEnd(tileBeingChecked.x, tileBeingChecked.y);
                 if (this.moveIsValid()) {
+                    console.log('valid move');
                     // make move
                 } else {
-                        // reset variables.
-                    }
+                    this.resetMove();
+                    // reset variables.
+                }
             }
         },
         tileIsOccupied: function tileIsOccupied(tileBeingChecked) {
@@ -14907,8 +14909,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 } else {
                     distanceMoved = this.moveBeginning.y - this.moveEnd.y;
                 }
-
-                console.log("distance moved: " + distanceMoved);
                 if (distanceMoved !== 2) {
                     return false;
                 }
@@ -14919,9 +14919,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 } else {
                     distanceMoved = this.moveBeginning.x - this.moveEnd.x;
                 }
-
-                console.log("distance moved: " + distanceMoved);
                 if (distanceMoved !== 2) {
+                    return false;
+                }
+            }
+            return true;
+        },
+        isJumping: function isJumping() {
+            if (this.moveBeginning.x < this.moveEnd.x) {
+                var tileToJump = { x: this.moveBeginning.x + 1, y: this.moveBeginning.y };
+                if (!this.tileIsOccupied(tileToJump)) {
+                    return false;
+                }
+            }
+            if (this.moveBeginning.x > this.moveEnd.x) {
+                var _tileToJump = { x: this.moveBeginning.x - 1, y: this.moveBeginning.y };
+                if (!this.tileIsOccupied(_tileToJump)) {
+                    return false;
+                }
+            }
+            if (this.moveBeginning.y < this.moveEnd.y) {
+                var _tileToJump2 = { x: this.moveBeginning.x, y: this.moveBeginning.y + 1 };
+                if (!this.tileIsOccupied(_tileToJump2)) {
+                    return false;
+                }
+            }
+            if (this.moveBeginning.y > this.moveEnd.y) {
+                var _tileToJump3 = { x: this.moveBeginning.x, y: this.moveBeginning.y - 1 };
+                if (!this.tileIsOccupied(_tileToJump3)) {
                     return false;
                 }
             }
@@ -14930,6 +14955,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         moveIsValid: function moveIsValid() {
             if (!this.isValidDistance()) {
                 this.createError('Invalid Distance!');
+                return false;
+            }
+            if (!this.isJumping()) {
+                this.createError('Must Jump another Piece');
                 return false;
             }
         },
