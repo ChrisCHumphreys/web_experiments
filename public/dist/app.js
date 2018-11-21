@@ -14809,10 +14809,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             'gamePhase': "setup",
-            'boardHeight': 10,
-            'boardWidth': 10,
-            'newHeight': 10,
-            'newWidth': 10,
+            'boardHeight': 30,
+            'boardWidth': 30,
+            'newHeight': 30,
+            'newWidth': 30,
             'occupiedSquares': [],
             'errorText': "Unknown Error",
             'showError': false,
@@ -14834,6 +14834,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         resetSize: function resetSize() {
             this.boardHeight = parseInt(this.newHeight, 10);
             this.boardWidth = parseInt(this.newWidth, 10);
+            this.resetMove();
+            this.gamePhase = "setup";
             this.occupiedSquares = [];
         },
         addPieceToCheckersArray: function addPieceToCheckersArray(location) {
@@ -14938,7 +14940,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     return false;
                 }
             }
-            if (this.moveBeginning.x != this.moveEnd.x && this.moveBeginning.y != this.moveEnd.y) {
+            if (this.moveBeginning.x !== this.moveEnd.x && this.moveBeginning.y !== this.moveEnd.y) {
                 return false;
             }
             return true;
@@ -15241,7 +15243,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.square[data-v-76acc71a] {\n    width: 40px;\n    padding-bottom: 40px;\n    border-style: inset;\n    position: relative;\n}\n.checker[data-v-76acc71a] {\n    background-color: black;\n    width: 25px;\n    height: 25px;\n    padding-bottom: auto;\n    position: absolute;\n    margin: 7px auto auto 4px;\n    border-radius: 60px;\n}\n\n", ""]);
+exports.push([module.i, "\n.square[data-v-76acc71a] {\n    width: 40px;\n    padding-bottom: 40px;\n    border: 2px solid grey;\n    position: relative;\n}\n.checker[data-v-76acc71a] {\n    background-color: black;\n    width: 25px;\n    height: 25px;\n    padding-bottom: auto;\n    position: absolute;\n    margin: 7px auto auto 6px;\n    border-radius: 60px;\n}\n\n", ""]);
 
 // exports
 
@@ -15270,10 +15272,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         updateSquare: function updateSquare() {
             if (this.gamePhase === "setup") {
-                if (this.isOccupied) {
-                    this.$emit('remove-piece', { x: this.xValue, y: this.yValue });
-                } else {
-                    this.$emit('add-piece', { x: this.xValue, y: this.yValue });
+                if (this.yValue > 4) {
+                    if (this.isOccupied) {
+                        this.$emit('remove-piece', { x: this.xValue, y: this.yValue });
+                    } else {
+                        this.$emit('add-piece', { x: this.xValue, y: this.yValue });
+                    }
                 }
             } else {
                 this.$emit('move-attempted', {
@@ -15286,7 +15290,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     computed: {
         getColor: function getColor() {
-            return 'background-color: ' + this.color + ';';
+            if (this.yValue == 4) {
+                return 'background-color: ' + this.color + '; border-bottom: 2px solid black;';
+            }
+            if (this.yValue == 5) {
+                return 'background-color: ' + this.color + '; border-top: 2px solid black;';
+            } else {
+                return 'background-color: ' + this.color + ';';
+            }
         }
     }
 });

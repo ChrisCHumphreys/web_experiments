@@ -75,10 +75,10 @@
         data: function () {
             return {
                 'gamePhase': "setup",
-                'boardHeight': 10,
-                'boardWidth': 10,
-                'newHeight': 10,
-                'newWidth': 10,
+                'boardHeight': 30,
+                'boardWidth': 30,
+                'newHeight': 30,
+                'newWidth': 30,
                 'occupiedSquares': [],
                 'errorText': "Unknown Error",
                 'showError': false,
@@ -100,6 +100,8 @@
             resetSize() {
                 this.boardHeight = parseInt(this.newHeight, 10);
                 this.boardWidth = parseInt(this.newWidth, 10);
+                this.resetMove();
+                this.gamePhase = "setup";
                 this.occupiedSquares = [];
             },
             addPieceToCheckersArray(location) {
@@ -204,7 +206,7 @@
                         return false;
                     }
                 }
-                if (this.moveBeginning.x != this.moveEnd.x && this.moveBeginning.y != this.moveEnd.y) {
+                if (this.moveBeginning.x !== this.moveEnd.x && this.moveBeginning.y !== this.moveEnd.y) {
                     return false;
                 }
                 return true;

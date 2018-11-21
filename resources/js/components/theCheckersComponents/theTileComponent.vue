@@ -17,10 +17,12 @@
         methods: {
             updateSquare: function() {
                 if (this.gamePhase === "setup") {
-                    if (this.isOccupied) {
-                        this.$emit('remove-piece', {x: this.xValue, y: this.yValue});
-                    } else {
-                        this.$emit('add-piece', {x: this.xValue, y: this.yValue});
+                    if (this.yValue > 4) {
+                        if (this.isOccupied) {
+                            this.$emit('remove-piece', {x: this.xValue, y: this.yValue});
+                        } else {
+                            this.$emit('add-piece', {x: this.xValue, y: this.yValue});
+                        }
                     }
                 } else {
                     this.$emit('move-attempted', {
@@ -33,7 +35,14 @@
         },
         computed: {
             getColor: function () {
-                return 'background-color: ' + this.color + ';'
+                if (this.yValue == 4) {
+                    return 'background-color: ' + this.color + '; border-bottom: 2px solid black;';
+                }
+                if (this.yValue == 5) {
+                    return 'background-color: ' + this.color + '; border-top: 2px solid black;';
+                } else {
+                    return 'background-color: ' + this.color + ';';
+                }
             },
         }
     }
@@ -43,7 +52,7 @@
     .square {
         width: 40px;
         padding-bottom: 40px;
-        border-style: inset;
+        border: 2px solid grey;
         position: relative;
     }
 
@@ -53,7 +62,7 @@
         height: 25px;
         padding-bottom: auto;
         position: absolute;
-        margin: 7px auto auto 4px;
+        margin: 7px auto auto 6px;
         border-radius: 60px;
     }
 
