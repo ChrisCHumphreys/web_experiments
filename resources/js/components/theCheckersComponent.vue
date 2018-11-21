@@ -50,6 +50,15 @@
                     </div>
                 </div>
             </div>
+            <div class="tile is-ancestor" v-if="!showError">
+                <div class="tile is-12">
+                    <div class="tile is-parent">
+                        <div class="tile is-12 notification is-success">
+                            <p>Current Score Will go Here!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
         <section>
             <the-board-component

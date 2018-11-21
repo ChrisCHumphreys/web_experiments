@@ -14798,6 +14798,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -15545,6 +15554,10 @@ var render = function() {
               ])
             ])
           ])
+        : _vm._e(),
+      _vm._v(" "),
+      !_vm.showError
+        ? _c("div", { staticClass: "tile is-ancestor" }, [_vm._m(0)])
         : _vm._e()
     ]),
     _vm._v(" "),
@@ -15569,7 +15582,28 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "tile is-12" }, [
+      _c("div", { staticClass: "tile is-parent" }, [
+        _c(
+          "div",
+          {
+            staticClass: "tile is-12 notification is-success has-text-centered"
+          },
+          [
+            _c("p", { staticClass: "has-text-centered" }, [
+              _vm._v("Current Score Will go Here!")
+            ])
+          ]
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
