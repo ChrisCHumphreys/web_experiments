@@ -14825,8 +14825,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 y: -1
             },
             'pieceBeingJumped': {
-                x: null,
-                y: null
+                x: -1,
+                y: -1
             }
         };
     },
@@ -14861,8 +14861,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // else reset moves -> error
             if (this.moveBeginning.x === -1) {
                 this.validateAndMakeBeginningMove(tileBeingChecked);
-            } else {
+            } else if (this.moveEnd.x === -1) {
                 this.validateAndMakeSecondMove(tileBeingChecked);
+            } else {
+                this.resetMove();
             }
         },
         validateAndMakeBeginningMove: function validateAndMakeBeginningMove(tileBeingChecked) {
@@ -14880,19 +14882,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             } else {
                 this.setMoveEnd(tileBeingChecked.x, tileBeingChecked.y);
                 if (this.moveIsValid()) {
-                    console.log('valid move: ' + this.pieceBeingJumped);
-                    // this.removeJumpedPiece();
-                    // make move
+                    this.removeFromCheckersArray(this.pieceBeingJumped);
+                    this.addPieceToCheckersArray({ x: this.moveEnd.x, y: this.moveEnd.y });
+                    this.removeFromCheckersArray(this.moveBeginning);
+                    this.resetMove();
                 } else {
                     this.resetMove();
-                    // reset variables.
                 }
             }
         },
-        removeJumpedPiece: function removeJumpedPiece() {},
         moveIsValid: function moveIsValid() {
             if (!this.isValidDistance()) {
-                this.createError('Invalid Distance!');
+                this.createError('Invalid Move!');
                 return false;
             }
             if (!this.isJumping()) {
@@ -14918,6 +14919,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.moveEnd.x = x;
             this.moveEnd.y = y;
         },
+        setBeingJumped: function setBeingJumped(x, y) {
+            this.pieceBeingJumped.x = x;
+            this.pieceBeingJumped.y = y;
+        },
         isValidDistance: function isValidDistance() {
             var distanceMoved = 0;
             if (this.moveBeginning.x === this.moveEnd.x) {
@@ -14939,6 +14944,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (distanceMoved !== 2) {
                     return false;
                 }
+            }
+            if (this.moveBeginning.x != this.moveEnd.x && this.moveBeginning.y != this.moveEnd.y) {
+                return false;
             }
             return true;
         },
@@ -14974,6 +14982,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         resetMove: function resetMove() {
             this.setMoveBegin(-1, -1);
             this.setMoveEnd(-1, -1);
+            this.setBeingJumped(-1, -1);
         },
         createError: function createError(errorText) {
             this.errorText = errorText;

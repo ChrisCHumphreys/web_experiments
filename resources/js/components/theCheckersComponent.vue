@@ -91,8 +91,8 @@
                     y: -1,
                 },
                 'pieceBeingJumped': {
-                    x: null,
-                    y: null,
+                    x: -1,
+                    y: -1,
                 }
             }
         },
@@ -127,8 +127,10 @@
                         // else reset moves -> error
                 if (this.moveBeginning.x === -1) {
                     this.validateAndMakeBeginningMove(tileBeingChecked);
-                } else {
+                } else if (this.moveEnd.x === -1) {
                     this.validateAndMakeSecondMove(tileBeingChecked);
+                } else {
+                    this.resetMove();
                 }
             },
             validateAndMakeBeginningMove(tileBeingChecked) {
@@ -146,21 +148,18 @@
                 } else {
                     this.setMoveEnd(tileBeingChecked.x, tileBeingChecked.y);
                     if (this.moveIsValid()) {
-                        console.log('valid move: ' + this.pieceBeingJumped);
-                        // this.removeJumpedPiece();
-                        // make move
+                        this.removeFromCheckersArray(this.pieceBeingJumped);
+                        this.addPieceToCheckersArray({x: this.moveEnd.x, y: this.moveEnd.y});
+                        this.removeFromCheckersArray(this.moveBeginning);
+                        this.resetMove();
                     } else {
                         this.resetMove();
-                        // reset variables.
                     }
                 }
             },
-            removeJumpedPiece() {
-
-            },
             moveIsValid() {
                 if (!this.isValidDistance()) {
-                    this.createError('Invalid Distance!');
+                    this.createError('Invalid Move!');
                     return false;
                 }
                 if (!this.isJumping()) {
@@ -186,6 +185,10 @@
                 this.moveEnd.x = x;
                 this.moveEnd.y = y;
             },
+            setBeingJumped(x, y) {
+                this.pieceBeingJumped.x = x;
+                this.pieceBeingJumped.y = y;
+            },
             isValidDistance() {
                 let distanceMoved = 0;
                 if(this.moveBeginning.x === this.moveEnd.x) {
@@ -198,7 +201,7 @@
                         return false;
                     }
                 }
-                if(this.moveBeginning.y === this.moveEnd.y) {
+                if (this.moveBeginning.y === this.moveEnd.y) {
                     if (this.moveBeginning.x - this.moveEnd.x < 0) {
                         distanceMoved = (this.moveBeginning.x - this.moveEnd.x) * -1;
                     } else {
@@ -207,6 +210,9 @@
                     if (distanceMoved !== 2) {
                         return false;
                     }
+                }
+                if (this.moveBeginning.x != this.moveEnd.x && this.moveBeginning.y != this.moveEnd.y) {
+                    return false;
                 }
                 return true;
             },
@@ -242,6 +248,7 @@
             resetMove() {
                 this.setMoveBegin(-1, -1);
                 this.setMoveEnd(-1, -1);
+                this.setBeingJumped(-1, -1);
             },
             createError(errorText) {
                 this.errorText = errorText;
