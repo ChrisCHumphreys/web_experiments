@@ -14852,13 +14852,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var tileBeingChecked = {};
             tileBeingChecked.x = moveDetails.column;
             tileBeingChecked.y = moveDetails.row;
-            // if first move
-            // validate square has a piece
-            // store if does, error and reset if not
-            // if second move
-            // determine if move is legal
-            // if possible -> move
-            // else reset moves -> error
             if (this.moveBeginning.x === -1) {
                 this.validateAndMakeBeginningMove(tileBeingChecked);
             } else if (this.moveEnd.x === -1) {
@@ -15248,7 +15241,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.square[data-v-76acc71a] {\n    width: 75px;\n    padding-bottom: 75px;\n    border-style: inset;\n    position: relative;\n}\n.checker[data-v-76acc71a] {\n    background-color: black;\n    width: 60px;\n    height: 60px;\n    padding-bottom: auto;\n    position: absolute;\n    margin: 7px auto auto 4px;\n    border-radius: 60px;\n}\n\n", ""]);
+exports.push([module.i, "\n.square[data-v-76acc71a] {\n    width: 40px;\n    padding-bottom: 40px;\n    border-style: inset;\n    position: relative;\n}\n.checker[data-v-76acc71a] {\n    background-color: black;\n    width: 25px;\n    height: 25px;\n    padding-bottom: auto;\n    position: absolute;\n    margin: 7px auto auto 4px;\n    border-radius: 60px;\n}\n\n", ""]);
 
 // exports
 
@@ -15279,10 +15272,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.gamePhase === "setup") {
                 if (this.isOccupied) {
                     this.$emit('remove-piece', { x: this.xValue, y: this.yValue });
-                    // this.isOccupied = false;
                 } else {
                     this.$emit('add-piece', { x: this.xValue, y: this.yValue });
-                    // this.isOccupied = true;
                 }
             } else {
                 this.$emit('move-attempted', {

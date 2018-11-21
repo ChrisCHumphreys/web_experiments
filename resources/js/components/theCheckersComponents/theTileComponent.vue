@@ -19,10 +19,8 @@
                 if (this.gamePhase === "setup") {
                     if (this.isOccupied) {
                         this.$emit('remove-piece', {x: this.xValue, y: this.yValue});
-                        // this.isOccupied = false;
                     } else {
                         this.$emit('add-piece', {x: this.xValue, y: this.yValue});
-                        // this.isOccupied = true;
                     }
                 } else {
                     this.$emit('move-attempted', {
@@ -43,16 +41,16 @@
 
 <style scoped>
     .square {
-        width: 75px;
-        padding-bottom: 75px;
+        width: 40px;
+        padding-bottom: 40px;
         border-style: inset;
         position: relative;
     }
 
     .checker {
         background-color: black;
-        width: 60px;
-        height: 60px;
+        width: 25px;
+        height: 25px;
         padding-bottom: auto;
         position: absolute;
         margin: 7px auto auto 4px;

@@ -118,13 +118,6 @@
                 let tileBeingChecked = {};
                 tileBeingChecked.x = moveDetails.column;
                 tileBeingChecked.y = moveDetails.row;
-                // if first move
-                    // validate square has a piece
-                        // store if does, error and reset if not
-                // if second move
-                    // determine if move is legal
-                        // if possible -> move
-                        // else reset moves -> error
                 if (this.moveBeginning.x === -1) {
                     this.validateAndMakeBeginningMove(tileBeingChecked);
                 } else if (this.moveEnd.x === -1) {
