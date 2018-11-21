@@ -90,6 +90,10 @@
                     x: -1,
                     y: -1,
                 },
+                'pieceBeingJumped': {
+                    x: null,
+                    y: null,
+                }
             }
         },
         methods: {
@@ -142,13 +146,28 @@
                 } else {
                     this.setMoveEnd(tileBeingChecked.x, tileBeingChecked.y);
                     if (this.moveIsValid()) {
-                        console.log('valid move');
+                        console.log('valid move: ' + this.pieceBeingJumped);
+                        // this.removeJumpedPiece();
                         // make move
                     } else {
                         this.resetMove();
                         // reset variables.
                     }
                 }
+            },
+            removeJumpedPiece() {
+
+            },
+            moveIsValid() {
+                if (!this.isValidDistance()) {
+                    this.createError('Invalid Distance!');
+                    return false;
+                }
+                if (!this.isJumping()) {
+                    this.createError('Must Jump another Piece');
+                    return false;
+                }
+                return true;
             },
             tileIsOccupied(tileBeingChecked) {
                 let checkerFound = false;
@@ -192,41 +211,33 @@
                 return true;
             },
             isJumping() {
+                let tileToJump = {};
                 if (this.moveBeginning.x < this.moveEnd.x) {
-                    let tileToJump = {x: this.moveBeginning.x + 1, y: this.moveBeginning.y};
+                    tileToJump = {x: this.moveBeginning.x + 1, y: this.moveBeginning.y};
                     if (!this.tileIsOccupied(tileToJump)) {
                         return false;
                     }
                 }
                 if (this.moveBeginning.x > this.moveEnd.x) {
-                    let tileToJump = {x: this.moveBeginning.x - 1, y: this.moveBeginning.y};
+                    tileToJump = {x: this.moveBeginning.x - 1, y: this.moveBeginning.y};
                     if (!this.tileIsOccupied(tileToJump)) {
                         return false;
                     }
                 }
                 if (this.moveBeginning.y < this.moveEnd.y) {
-                    let tileToJump = {x: this.moveBeginning.x, y: this.moveBeginning.y + 1};
+                    tileToJump = {x: this.moveBeginning.x, y: this.moveBeginning.y + 1};
                     if (!this.tileIsOccupied(tileToJump)) {
                         return false;
                     }
                 }
                 if (this.moveBeginning.y > this.moveEnd.y) {
-                    let tileToJump = {x: this.moveBeginning.x, y: this.moveBeginning.y - 1};
+                    tileToJump = {x: this.moveBeginning.x, y: this.moveBeginning.y - 1};
                     if (!this.tileIsOccupied(tileToJump)) {
                         return false;
                     }
                 }
+                this.pieceBeingJumped = tileToJump;
                 return true;
-            },
-            moveIsValid() {
-                if (!this.isValidDistance()) {
-                    this.createError('Invalid Distance!');
-                    return false;
-                }
-                if (!this.isJumping()) {
-                    this.createError('Must Jump another Piece');
-                    return false;
-                }
             },
             resetMove() {
                 this.setMoveBegin(-1, -1);

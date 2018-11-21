@@ -14823,6 +14823,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             'moveEnd': {
                 x: -1,
                 y: -1
+            },
+            'pieceBeingJumped': {
+                x: null,
+                y: null
             }
         };
     },
@@ -14876,13 +14880,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             } else {
                 this.setMoveEnd(tileBeingChecked.x, tileBeingChecked.y);
                 if (this.moveIsValid()) {
-                    console.log('valid move');
+                    console.log('valid move: ' + this.pieceBeingJumped);
+                    // this.removeJumpedPiece();
                     // make move
                 } else {
                     this.resetMove();
                     // reset variables.
                 }
             }
+        },
+        removeJumpedPiece: function removeJumpedPiece() {},
+        moveIsValid: function moveIsValid() {
+            if (!this.isValidDistance()) {
+                this.createError('Invalid Distance!');
+                return false;
+            }
+            if (!this.isJumping()) {
+                this.createError('Must Jump another Piece');
+                return false;
+            }
+            return true;
         },
         tileIsOccupied: function tileIsOccupied(tileBeingChecked) {
             var checkerFound = false;
@@ -14926,41 +14943,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return true;
         },
         isJumping: function isJumping() {
+            var tileToJump = {};
             if (this.moveBeginning.x < this.moveEnd.x) {
-                var tileToJump = { x: this.moveBeginning.x + 1, y: this.moveBeginning.y };
+                tileToJump = { x: this.moveBeginning.x + 1, y: this.moveBeginning.y };
                 if (!this.tileIsOccupied(tileToJump)) {
                     return false;
                 }
             }
             if (this.moveBeginning.x > this.moveEnd.x) {
-                var _tileToJump = { x: this.moveBeginning.x - 1, y: this.moveBeginning.y };
-                if (!this.tileIsOccupied(_tileToJump)) {
+                tileToJump = { x: this.moveBeginning.x - 1, y: this.moveBeginning.y };
+                if (!this.tileIsOccupied(tileToJump)) {
                     return false;
                 }
             }
             if (this.moveBeginning.y < this.moveEnd.y) {
-                var _tileToJump2 = { x: this.moveBeginning.x, y: this.moveBeginning.y + 1 };
-                if (!this.tileIsOccupied(_tileToJump2)) {
+                tileToJump = { x: this.moveBeginning.x, y: this.moveBeginning.y + 1 };
+                if (!this.tileIsOccupied(tileToJump)) {
                     return false;
                 }
             }
             if (this.moveBeginning.y > this.moveEnd.y) {
-                var _tileToJump3 = { x: this.moveBeginning.x, y: this.moveBeginning.y - 1 };
-                if (!this.tileIsOccupied(_tileToJump3)) {
+                tileToJump = { x: this.moveBeginning.x, y: this.moveBeginning.y - 1 };
+                if (!this.tileIsOccupied(tileToJump)) {
                     return false;
                 }
             }
+            this.pieceBeingJumped = tileToJump;
             return true;
-        },
-        moveIsValid: function moveIsValid() {
-            if (!this.isValidDistance()) {
-                this.createError('Invalid Distance!');
-                return false;
-            }
-            if (!this.isJumping()) {
-                this.createError('Must Jump another Piece');
-                return false;
-            }
         },
         resetMove: function resetMove() {
             this.setMoveBegin(-1, -1);
