@@ -260,8 +260,8 @@
             currentScore: function () {
                 let highScore = 0;
                 this.occupiedSquares.forEach(function (item) {
-                    if (item.y < 7) {
-                        let tempScore = 7 - item.y;
+                    if (item.y < 5) {
+                        let tempScore = 5 - item.y;
                         if (tempScore > highScore) {
                             highScore = tempScore;
                         }

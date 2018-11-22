@@ -14994,8 +14994,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         currentScore: function currentScore() {
             var highScore = 0;
             this.occupiedSquares.forEach(function (item) {
-                if (item.y < 7) {
-                    var tempScore = 7 - item.y;
+                if (item.y < 5) {
+                    var tempScore = 5 - item.y;
                     if (tempScore > highScore) {
                         highScore = tempScore;
                     }
@@ -15675,10 +15675,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     computed: {
         getColor: function getColor() {
-            if (this.yValue == 6) {
+            if (this.yValue == 4) {
                 return 'background-color: ' + this.color + '; border-bottom: 2px solid black;';
             }
-            if (this.yValue == 7) {
+            if (this.yValue == 5) {
                 return 'background-color: ' + this.color + '; border-top: 2px solid black;';
             } else {
                 return 'background-color: ' + this.color + ';';
