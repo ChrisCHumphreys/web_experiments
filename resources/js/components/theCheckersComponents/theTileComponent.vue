@@ -35,10 +35,10 @@
         },
         computed: {
             getColor: function () {
-                if (this.yValue == 4) {
+                if (this.yValue == 6) {
                     return 'background-color: ' + this.color + '; border-bottom: 2px solid black;';
                 }
-                if (this.yValue == 5) {
+                if (this.yValue == 7) {
                     return 'background-color: ' + this.color + '; border-top: 2px solid black;';
                 } else {
                     return 'background-color: ' + this.color + ';';

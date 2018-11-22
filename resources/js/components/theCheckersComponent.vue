@@ -39,23 +39,16 @@
                             </div>
                         </article>
                     </div>
-                </div>
-            </div>
-            <div class="tile is-ancestor" v-if="showError">
-                <div class="tile is-12">
-                    <div class="tile is-parent">
-                        <div class="tile is-12 notification is-danger">
-                            <p>{{ errorText }}</p>
-                        </div>
+                    <div class="tile is-2 is-parent" v-if="!showError">
+                        <article class="tile is-child notification is-primary">
+                            <p class="title">Current Score: {{ currentScore }}</p>
+                        </article>
                     </div>
-                </div>
-            </div>
-            <div class="tile is-ancestor" v-if="!showError">
-                <div class="tile is-12">
-                    <div class="tile is-parent">
-                        <div class="tile is-12 notification is-success">
-                            <p>Current Score Will go Here!</p>
-                        </div>
+                    <div class="tile is-2 is-parent" v-if="showError">
+                        <article class="tile is-child notification is-danger">
+                            <p class="title">Current Score: {{ currentScore }}</p>
+                            <p>{{ errorText }}</p>
+                        </article>
                     </div>
                 </div>
             </div>
@@ -262,7 +255,21 @@
                 this.errorText = "Unknown Error";
                 this.showError = false;
             }
-        }
+        },
+        computed: {
+            currentScore: function () {
+                let highScore = 0;
+                this.occupiedSquares.forEach(function (item) {
+                    if (item.y < 7) {
+                        let tempScore = 7 - item.y;
+                        if (tempScore > highScore) {
+                            highScore = tempScore;
+                        }
+                    }
+                });
+                return highScore;
+            }
+        },
     }
 </script>
 
