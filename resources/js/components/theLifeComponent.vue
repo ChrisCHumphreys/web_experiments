@@ -1,10 +1,13 @@
 <template>
-    <h1>test -> I'm working!</h1>
+    <the-checkers-component
+        title="Conway's Game of Life"/>
 </template>
 
 <script>
+    import TheCheckersComponent from "./theCheckersComponent";
     export default {
-        name: "theLifeComponent"
+        name: "theLifeComponent",
+        components: {TheCheckersComponent}
     }
 </script>
 

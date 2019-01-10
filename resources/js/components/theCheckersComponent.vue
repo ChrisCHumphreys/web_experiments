@@ -1,7 +1,7 @@
 <template>
     <div class="game-wrapper">
         <h1 class="title">
-            Conway Checkers
+            {{ title }}
         </h1>
         <section>
             <div class="tile is-ancestor">
@@ -70,6 +70,7 @@
     import theBoardComponent from './theCheckersComponents/theBoardComponent'
 
     export default {
+        props: {'title': String},
         name: "theCheckersComponent",
         components: {
             theBoardComponent,
