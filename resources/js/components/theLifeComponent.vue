@@ -1,6 +1,7 @@
 <template>
-    <the-checkers-component
-        title="Conway's Game of Life"/>
+    <!--<the-checkers-component-->
+        <!--title="Conway's Game of Life"/>-->
+    <h1>Under Construction!  Check back soon</h1>
 </template>
 
 <script>

@@ -9,10 +9,10 @@
                     <router-link to="/conway-checkers">Conway Checkers</router-link>
                 </li>
                 <li>
-                <router-link to="/conway-life">Conway's Game of Life</router-link>
+                    <router-link to="/conway-life">Conway's Game of Life</router-link>
                 </li>
                 <li>
-                    <router-link to="/testing">Component Testing</router-link>
+                    <router-link to="/testing">Testing and experiments</router-link>
                 </li>
             </ul>
         </div>
@@ -26,5 +26,12 @@
 </script>
 
 <style scoped>
-
+     @media (max-width: 500px) {
+        .tabs ul {
+            flex-direction: column;
+        }
+        li {
+            width: 100%;
+        }
+    }
 </style>
