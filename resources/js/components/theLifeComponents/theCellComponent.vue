@@ -9,17 +9,19 @@
 
     export default {
         name: "theCellComponent",
-        props: ['isAlive', 'xValue', 'yValue'],
+        props: ['isAlive', 'xValue', 'yValue', 'gamePhase'],
         data: function () {
             return {
             }
         },
         methods: {
             updateSquare: function() {
-                if (!this.isAlive) {
-                    this.$emit('add-piece', {x: this.xValue, y: this.yValue});
-                } else {
-                    this.$emit('remove-piece', {x: this.xValue, y: this.yValue});
+                if (this.gamePhase === "setup") {
+                    if (!this.isAlive) {
+                        this.$emit('add-piece', {x: this.xValue, y: this.yValue});
+                    } else {
+                        this.$emit('remove-piece', {x: this.xValue, y: this.yValue});
+                    }
                 }
             }
         },

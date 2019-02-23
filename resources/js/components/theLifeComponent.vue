@@ -15,8 +15,12 @@
                                 </label>
                                 <label class="radio">
                                     <input type="radio" value="run" v-model="gamePhase">
-                                    Run
+                                    Running
                                 </label>
+                                <a class="button start-button is-primary is-inverted"
+                                    v-on:click="startSimulation">
+                                    {{ buttonText }}
+                                </a>
                             </div>
                         </article>
                     </div>
@@ -31,7 +35,7 @@
                                     <label for="width">Width</label>
                                     <input class="input is-primary" id="width" type="text"
                                            v-model="newWidth">
-                                    <a class="button is-success resize-button" v-on:click="resetSize">Resize/Clear
+                                    <a class="button is-primary is-inverted resize-button" v-on:click="resetSize">Resize/Clear
                                         Board</a>
                                 </div>
                             </div>
@@ -49,6 +53,7 @@
             :height="height"
             :width="width"
             :living-cells="livingSquares"
+            :game-phase="gamePhase"
             v-on:add-piece="addLivingCell"
             v-on:remove-piece="killCell">
         </the-life-board>
@@ -68,6 +73,8 @@
                 width: 30,
                 gamePhase: "setup",
                 livingSquares: [],
+                running: "",
+                buttonText: "Start Simulation",
             }
         },
         methods: {
@@ -86,6 +93,57 @@
                     }
                 });
                 this.livingSquares = newOccupied;
+            },
+            startSimulation: function() {
+                if (this.gamePhase == "setup") {
+                    this.gamePhase = "run";
+                    this.buttonText = "Stop Simulation";
+                    this.running = setInterval(this.processOneGeneration, 500);
+                } else {
+                    this.gamePhase = "setup";
+                    this.buttonText = "Start Simulation";
+                    clearInterval(this.running);
+                }
+            },
+            processOneGeneration: function () {
+                if (this.livingSquares.length == 0) {
+                    this.startSimulation();
+                }
+                let updatedCellArray = [];
+                for (var x = 1; x <= this.width; x++) {
+                    for (var y = 1; y <= this.height; y++) {
+                        if ((this.getNeighborCount(x, y) == 3) && (!this.cellIsAlive(x, y))) {
+                            updatedCellArray.push({x, y});
+                        }
+                        else if (((this.getNeighborCount(x, y) == 2) || (this.getNeighborCount(x, y) == 3)) && (this.cellIsAlive(x, y))) {
+                            updatedCellArray.push({x, y});
+                        }
+                    }
+                }
+                this.livingSquares = updatedCellArray;
+            },
+            getNeighborCount: function(x, y) {
+                let neighbors = this.livingSquares.filter(function(item){
+                    if (item.y == y -1 && ((item.x == x) || (item.x == x-1) || (item.x == x + 1))) {
+                        return item;
+                    }
+                    if (item.y == y && ((item.x == x-1) || (item.x == x + 1))) {
+                        return item;
+                    }
+                    if (item.y == y + 1 && ((item.x == x) || (item.x == x - 1) || (item.x == x + 1))) {
+                        return item;
+                    }
+                });
+                return neighbors.length;
+            },
+            cellIsAlive: function (x, y) {
+                let alive = false;
+                for (let cell of this.livingSquares) {
+                    if ((x == cell.x) && (y == cell.y)) {
+                        alive = true;
+                    }
+                }
+                return alive;
             }
         },
         computed: {
@@ -99,5 +157,8 @@
 <style scoped>
     .game-wrapper {
         margin: 30px;
+    }
+    .button {
+        margin-top: 5px;
     }
 </style>

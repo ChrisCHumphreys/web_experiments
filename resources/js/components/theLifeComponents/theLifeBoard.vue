@@ -9,7 +9,8 @@
                 :is-alive="checkIfLiving(row, tile)"
                 :key="makeKey(row, tile)"
                 v-on:add-piece="broadcastAddPiece"
-                v-on:remove-piece="broadcastRemovePiece">
+                v-on:remove-piece="broadcastRemovePiece"
+                :game-phase="gamePhase">
             </the-cell-component>
         </div>
     </div>
@@ -20,7 +21,7 @@
     import TheCellComponent from './theCellComponent';
     export default {
         name: "theLifeBoard",
-        props: ["height", "width", "livingCells"],
+        props: ["height", "width", "livingCells", "gamePhase"],
         components: {
             TheCellComponent,
         },
