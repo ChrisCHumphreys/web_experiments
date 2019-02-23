@@ -15767,6 +15767,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -15779,13 +15782,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             height: 30,
             width: 30,
             gamePhase: "setup",
-            currentScore: 0
+            livingSquares: []
         };
     },
     methods: {
         resetSize: function resetSize() {
             this.height = parseInt(this.newHeight);
             this.width = parseInt(this.newWidth);
+            this.livingSquares = [];
+        },
+
+        addLivingCell: function addLivingCell(coords) {
+            this.livingSquares.push({ x: coords.x, y: coords.y });
+        },
+        killCell: function killCell(coords) {
+            var newOccupied = this.livingSquares.filter(function (item) {
+                if (item.x !== coords.x || item.y !== coords.y) {
+                    return item;
+                }
+            });
+            this.livingSquares = newOccupied;
+        }
+    },
+    computed: {
+        getScore: function getScore() {
+            return this.livingSquares.length;
         }
     }
 });
@@ -15850,11 +15871,11 @@ var render = function() {
                             expression: "gamePhase"
                           }
                         ],
-                        attrs: { type: "radio", value: "play" },
-                        domProps: { checked: _vm._q(_vm.gamePhase, "play") },
+                        attrs: { type: "radio", value: "run" },
+                        domProps: { checked: _vm._q(_vm.gamePhase, "run") },
                         on: {
                           change: function($event) {
-                            _vm.gamePhase = "play"
+                            _vm.gamePhase = "run"
                           }
                         }
                       }),
@@ -15952,7 +15973,7 @@ var render = function() {
                 { staticClass: "tile is-child notification is-primary" },
                 [
                   _c("p", { staticClass: "title" }, [
-                    _vm._v("Living Cells: " + _vm._s(_vm.currentScore))
+                    _vm._v("Living Cells: " + _vm._s(_vm.getScore))
                   ])
                 ]
               )
@@ -15961,7 +15982,14 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("the-life-board", { attrs: { height: _vm.height, width: _vm.width } })
+      _c("the-life-board", {
+        attrs: {
+          height: _vm.height,
+          width: _vm.width,
+          "living-cells": _vm.livingSquares
+        },
+        on: { "add-piece": _vm.addLivingCell, "remove-piece": _vm.killCell }
+      })
     ],
     1
   )
@@ -16646,7 +16674,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.board-wrapper[data-v-3272ba20] {\n    margin-top: 10px;\n}\n", ""]);
 
 // exports
 
@@ -16674,11 +16702,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "theLifeBoard",
-    props: ["height", "width"],
+    props: ["height", "width", "livingCells"],
     components: {
         TheCellComponent: __WEBPACK_IMPORTED_MODULE_0__theCellComponent___default.a
     },
@@ -16688,8 +16719,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         makeKey: function makeKey(row, tile) {
             return row.toString() + ', ' + tile.toString();
+        },
+        broadcastAddPiece: function broadcastAddPiece(addMessage) {
+            this.$emit('add-piece', { x: addMessage.x, y: addMessage.y });
+        },
+        broadcastRemovePiece: function broadcastRemovePiece(removeMessage) {
+            this.$emit('remove-piece', { x: removeMessage.x, y: removeMessage.y });
+        },
+        checkIfLiving: function checkIfLiving(row, tile) {
+            var living = false;
+            this.livingCells.forEach(function (item) {
+                if (tile == item.x && row == item.y) {
+                    living = true;
+                }
+            });
+            return living;
         }
-    }
+    },
+    computed: {}
 });
 
 /***/ }),
@@ -16702,6 +16749,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "board-wrapper" },
     _vm._l(_vm.height, function(row) {
       return _c("div", { staticClass: "is-multiline is-centered" }, [
         _c(
@@ -16710,7 +16758,15 @@ var render = function() {
           _vm._l(_vm.width, function(tile) {
             return _c("the-cell-component", {
               key: _vm.makeKey(row, tile),
-              attrs: { "x-value": tile, "y-value": row }
+              attrs: {
+                "x-value": tile,
+                "y-value": row,
+                "is-alive": _vm.checkIfLiving(row, tile)
+              },
+              on: {
+                "add-piece": _vm.broadcastAddPiece,
+                "remove-piece": _vm.broadcastRemovePiece
+              }
             })
           })
         )
@@ -16814,7 +16870,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.square[data-v-7d39c03e] {\n    width: 40px;\n    padding-bottom: 40px;\n    border: 2px solid grey;\n    position: relative;\n    background-color: lightgreen;\n}\n", ""]);
+exports.push([module.i, "\n.square[data-v-7d39c03e] {\n    width: 40px;\n    padding-bottom: 40px;\n    border: 2px solid grey;\n    position: relative;\n}\n", ""]);
 
 // exports
 
@@ -16836,22 +16892,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "theCellComponent",
-    props: ['isAlive'],
+    props: ['isAlive', 'xValue', 'yValue'],
     data: function data() {
-        return {
-            'alive': this.isAlive
-        };
+        return {};
     },
     methods: {
+        updateSquare: function updateSquare() {
+            if (!this.isAlive) {
+                this.$emit('add-piece', { x: this.xValue, y: this.yValue });
+            } else {
+                this.$emit('remove-piece', { x: this.xValue, y: this.yValue });
+            }
+        }
+    },
+    computed: {
         getColor: function getColor() {
-            if (this.alive) {
+            if (this.isAlive == true) {
                 return 'background-color: green;';
             } else {
                 return 'background-color: white;';
             }
-        },
-        updateSquare: function updateSquare() {
-            this.alive = true;
         }
     }
 });

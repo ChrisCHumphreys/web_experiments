@@ -1,6 +1,6 @@
 <template>
     <div class="square"
-         :style="getColor"
+         v-bind:style="getColor"
          v-on:click="updateSquare">
     </div>
 </template>
@@ -9,23 +9,28 @@
 
     export default {
         name: "theCellComponent",
-        props: ['isAlive'],
+        props: ['isAlive', 'xValue', 'yValue'],
         data: function () {
             return {
-                'alive': this.isAlive,
             }
         },
         methods: {
+            updateSquare: function() {
+                if (!this.isAlive) {
+                    this.$emit('add-piece', {x: this.xValue, y: this.yValue});
+                } else {
+                    this.$emit('remove-piece', {x: this.xValue, y: this.yValue});
+                }
+            }
+        },
+        computed: {
             getColor: function () {
-                if (this.alive) {
+                if (this.isAlive == true) {
                     return 'background-color: green;';
                 } else {
                     return 'background-color: white;';
                 }
             },
-            updateSquare: function() {
-                this.alive = true;
-            }
         }
     }
 </script>
@@ -36,6 +41,5 @@
         padding-bottom: 40px;
         border: 2px solid grey;
         position: relative;
-        background-color: lightgreen;
     }
 </style>
