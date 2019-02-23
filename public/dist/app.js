@@ -17236,7 +17236,7 @@ var render = function() {
                             expression: "gamePhase"
                           }
                         ],
-                        attrs: { type: "radio", value: "setup" },
+                        attrs: { type: "radio", value: "setup", disabled: "" },
                         domProps: { checked: _vm._q(_vm.gamePhase, "setup") },
                         on: {
                           change: function($event) {
@@ -17259,7 +17259,7 @@ var render = function() {
                             expression: "gamePhase"
                           }
                         ],
-                        attrs: { type: "radio", value: "run" },
+                        attrs: { type: "radio", value: "run", disabled: "" },
                         domProps: { checked: _vm._q(_vm.gamePhase, "run") },
                         on: {
                           change: function($event) {

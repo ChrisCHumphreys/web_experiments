@@ -10,11 +10,11 @@
                                     Game Phase
                                 </p>
                                 <label class="radio">
-                                    <input type="radio" value="setup" v-model="gamePhase">
+                                    <input type="radio" value="setup" v-model="gamePhase" disabled>
                                     Setup
                                 </label>
                                 <label class="radio">
-                                    <input type="radio" value="run" v-model="gamePhase">
+                                    <input type="radio" value="run" v-model="gamePhase" disabled>
                                     Running
                                 </label>
                                 <a class="button start-button is-primary is-inverted"
