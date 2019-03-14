@@ -52,7 +52,7 @@
     .square {
         width: 40px;
         padding-bottom: 40px;
-        border: 2px solid grey;
+        border: 1px solid grey;
         position: relative;
     }
 

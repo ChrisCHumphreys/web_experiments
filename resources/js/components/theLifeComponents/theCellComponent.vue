@@ -39,9 +39,9 @@
 
 <style scoped>
     .square {
-        width: 15px;
-        height: 15px;
-        border: 2px solid grey;
+        width: 20px;
+        height: 20px;
+        border: 1px solid grey;
         position: relative;
     }
     @media (max-width: 800px) {
