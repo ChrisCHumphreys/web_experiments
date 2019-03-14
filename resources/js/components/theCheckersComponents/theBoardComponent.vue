@@ -39,9 +39,9 @@
         methods: {
             assignColorToTile: function (row, tile) {
                 if ((row + tile) % 2 === 0) {
-                    return "blue";
+                    return "#006199";
                 } else {
-                    return "red";
+                    return "#da1852";
                 }
             },
             makeKey: function (row, tile) {

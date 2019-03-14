@@ -28,7 +28,7 @@
         computed: {
             getColor: function () {
                 if (this.isAlive == true) {
-                    return 'background-color: green;';
+                    return 'background-color: #0077af;';
                 } else {
                     return 'background-color: white;';
                 }
