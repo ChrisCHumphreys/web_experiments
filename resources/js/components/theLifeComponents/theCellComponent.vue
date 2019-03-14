@@ -44,6 +44,16 @@
         border: 2px solid grey;
         position: relative;
     }
+    @media (max-width: 800px) {
+        .square {
+            width: 25px;
+            height: 25px;
+            /*padding-bottom: 40px;*/
+            border: 1px solid grey;
+            position: relative;
+        }
+    }
+
     @media (max-width: 600px) {
         .square {
             width: 15px;

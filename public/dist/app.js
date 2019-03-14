@@ -17087,7 +17087,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.square[data-v-7d39c03e] {\n    width: 40px;\n    height: 40px;\n    border: 2px solid grey;\n    position: relative;\n}\n@media (max-width: 400px) {\n.square[data-v-7d39c03e] {\n        width: 15px;\n        height: 15px;\n        /*padding-bottom: 40px;*/\n        border: 1px solid grey;\n        position: relative;\n}\n}\n", ""]);
+exports.push([module.i, "\n.square[data-v-7d39c03e] {\n    width: 40px;\n    height: 40px;\n    border: 2px solid grey;\n    position: relative;\n}\n@media (max-width: 800px) {\n.square[data-v-7d39c03e] {\n        width: 25px;\n        height: 25px;\n        /*padding-bottom: 40px;*/\n        border: 1px solid grey;\n        position: relative;\n}\n}\n@media (max-width: 600px) {\n.square[data-v-7d39c03e] {\n        width: 15px;\n        height: 15px;\n        /*padding-bottom: 40px;*/\n        border: 1px solid grey;\n        position: relative;\n}\n}\n", ""]);
 
 // exports
 
