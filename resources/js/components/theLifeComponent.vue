@@ -51,7 +51,6 @@
                 </div>
             </section>
         </div>
-        <!--<stupid-component></stupid-component>-->
         <the-life-board
                 :height="height"
                 :width="width"
@@ -66,10 +65,9 @@
 
 <script>
     import TheLifeBoard from './theLifeComponents/theLifeBoard';
-    import stupidComponent from './stupidComp';
     export default {
         name: "theLifeComponent",
-        components: {TheLifeBoard, stupidComponent},
+        components: {TheLifeBoard},
         data: function () {
             return {
                 newHeight: 30,
