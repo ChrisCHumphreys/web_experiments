@@ -278,6 +278,10 @@
 
     .game-wrapper {
         margin: 30px;
+        overflow: auto;
+        overflow-y: hidden;
+        justify-content: center;
+        align-items: center;
     }
 
     .resize-button {

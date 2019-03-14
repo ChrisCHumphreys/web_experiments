@@ -15637,7 +15637,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.game-wrapper[data-v-97c5f6ce] {\n    margin: 30px;\n}\n.resize-button[data-v-97c5f6ce] {\n    margin-top: 5px;\n}\n\n", ""]);
+exports.push([module.i, "\n.game-wrapper[data-v-97c5f6ce] {\n    margin: 30px;\n    overflow: auto;\n    overflow-y: hidden;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.resize-button[data-v-97c5f6ce] {\n    margin-top: 5px;\n}\n\n", ""]);
 
 // exports
 
@@ -16044,7 +16044,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.is-h-scrollable[data-v-7dc731e3] {\n    overflow: auto;\n    white-space: nowrap;\n}\n\n", ""]);
+exports.push([module.i, "\n.is-h-scrollable[data-v-7dc731e3] {\n    margin-top: 10px;\n    white-space: nowrap;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    height: auto;\n}\n.life-col[data-v-7dc731e3] {\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n}\n.life-row[data-v-7dc731e3] {\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n}\n.row-holder[data-v-7dc731e3] {\n    min-width: 100%;\n    max-width: 100%;\n}\n\n", ""]);
 
 // exports
 
@@ -16057,6 +16057,7 @@ exports.push([module.i, "\n.is-h-scrollable[data-v-7dc731e3] {\n    overflow: au
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__theTileComponent__ = __webpack_require__(21);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__theTileComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__theTileComponent__);
+//
 //
 //
 //
@@ -16211,7 +16212,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.square[data-v-76acc71a] {\n    width: 40px;\n    padding-bottom: 40px;\n    border: 1px solid grey;\n    position: relative;\n}\n.checker[data-v-76acc71a] {\n    background-color: black;\n    width: 25px;\n    height: 25px;\n    padding-bottom: auto;\n    position: absolute;\n    margin: 7px auto auto 6px;\n    border-radius: 60px;\n}\n\n", ""]);
+exports.push([module.i, "\n.square[data-v-76acc71a] {\n    width: 40px;\n    height: 40px;\n    border: 1px solid grey;\n    position: relative;\n}\n.checker[data-v-76acc71a] {\n    background-color: black;\n    width: 25px;\n    height: 25px;\n    padding-bottom: auto;\n    position: absolute;\n    margin: 7px auto auto 6px;\n    border-radius: 60px;\n}\n@media (max-width: 800px) {\n.square[data-v-76acc71a] {\n        width: 15px;\n        height: 15px;\n        border: 1px solid grey;\n        position: relative;\n}\n.checker[data-v-76acc71a] {\n        background-color: black;\n        width: 10px;\n        height: 10px;\n        padding-bottom: auto;\n        position: absolute;\n        margin: 1px auto auto 1px;\n        border-radius: 60px;\n}\n}\n\n", ""]);
 
 // exports
 
@@ -16311,30 +16312,35 @@ var render = function() {
       "div",
       { staticClass: "column" },
       _vm._l(_vm.boardHeight, function(row) {
-        return _c("div", { staticClass: "is-multiline is-centered" }, [
-          _c(
-            "div",
-            { staticClass: "level-item" },
-            _vm._l(_vm.boardWidth, function(tile) {
-              return _c("the-tile-component", {
-                key: _vm.makeKey(row, tile),
-                attrs: {
-                  "x-value": tile,
-                  "y-value": row,
-                  "game-phase": _vm.gamePhase,
-                  color: _vm.assignColorToTile(row, tile),
-                  "is-occupied": _vm.checkIfOccupied(tile, row)
-                },
-                on: {
-                  "add-piece": _vm.broadcastAddPiece,
-                  "remove-piece": _vm.broadcastRemovePiece,
-                  "move-attempted": _vm.broadcastMoveAttempted
-                }
-              })
-            }),
-            1
-          )
-        ])
+        return _c(
+          "div",
+          { staticClass: "is-multiline is-centered row-holder" },
+          [
+            _c(
+              "div",
+              { staticClass: "level-item life-col" },
+              _vm._l(_vm.boardWidth, function(tile) {
+                return _c("the-tile-component", {
+                  key: _vm.makeKey(row, tile),
+                  staticClass: "life-row",
+                  attrs: {
+                    "x-value": tile,
+                    "y-value": row,
+                    "game-phase": _vm.gamePhase,
+                    color: _vm.assignColorToTile(row, tile),
+                    "is-occupied": _vm.checkIfOccupied(tile, row)
+                  },
+                  on: {
+                    "add-piece": _vm.broadcastAddPiece,
+                    "remove-piece": _vm.broadcastRemovePiece,
+                    "move-attempted": _vm.broadcastMoveAttempted
+                  }
+                })
+              }),
+              1
+            )
+          ]
+        )
       }),
       0
     )

@@ -51,7 +51,7 @@
 <style scoped>
     .square {
         width: 40px;
-        padding-bottom: 40px;
+        height: 40px;
         border: 1px solid grey;
         position: relative;
     }
@@ -64,6 +64,24 @@
         position: absolute;
         margin: 7px auto auto 6px;
         border-radius: 60px;
+    }
+    @media (max-width: 800px) {
+        .square {
+            width: 15px;
+            height: 15px;
+            border: 1px solid grey;
+            position: relative;
+        }
+
+        .checker {
+            background-color: black;
+            width: 10px;
+            height: 10px;
+            padding-bottom: auto;
+            position: absolute;
+            margin: 1px auto auto 1px;
+            border-radius: 60px;
+        }
     }
 
 </style>

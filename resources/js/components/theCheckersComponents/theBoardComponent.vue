@@ -1,10 +1,11 @@
 <template>
     <div class="columns is-h-scrollable">
         <div class="column">
-            <div class="is-multiline is-centered"
+            <div class="is-multiline is-centered row-holder"
                  v-for="row in boardHeight">
-                <div class="level-item">
+                <div class="level-item life-col">
                     <the-tile-component
+                            class="life-row"
                             v-for="tile in boardWidth"
                             :x-value="tile"
                             :y-value="row"
@@ -69,10 +70,24 @@
 </script>
 
 <style scoped>
-
     .is-h-scrollable {
-        overflow: auto;
+        margin-top: 10px;
         white-space: nowrap;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+    }
+    .life-col {
+        flex-direction: row;
+    }
+    .life-row {
+        flex-direction: row;
+    }
+    .row-holder {
+        min-width: 100%;
+        max-width: 100%;
     }
 
 </style>
