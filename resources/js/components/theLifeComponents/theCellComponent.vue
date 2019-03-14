@@ -40,8 +40,17 @@
 <style scoped>
     .square {
         width: 40px;
-        padding-bottom: 40px;
+        height: 40px;
         border: 2px solid grey;
         position: relative;
+    }
+    @media (max-width: 400px) {
+        .square {
+            width: 15px;
+            height: 15px;
+            /*padding-bottom: 40px;*/
+            border: 1px solid grey;
+            position: relative;
+        }
     }
 </style>

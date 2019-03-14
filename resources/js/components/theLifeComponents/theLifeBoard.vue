@@ -1,8 +1,9 @@
 <template>
     <div class="board-wrapper">
-    <div class="is-multiline is-centered" v-for="row in height">
-        <div class="level-item">
+    <div class="is-multiline is-grouped-multiline row-holder" v-for="row in height">
+        <div class="level-item life-col">
             <the-cell-component
+                    class="life-row"
                 v-for="tile in width"
                 :x-value="tile"
                 :y-value="row"
@@ -58,5 +59,20 @@
 <style scoped>
     .board-wrapper {
         margin-top: 10px;
+        display: inline-flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+    }
+    .life-col {
+        flex-direction: row;
+    }
+    .life-row {
+        flex-direction: row;
+    }
+    .row-holder {
+        min-width: 100%;
+        max-width: 100%;
     }
 </style>

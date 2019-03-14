@@ -514,7 +514,7 @@ module.exports = g;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(5);
-module.exports = __webpack_require__(53);
+module.exports = __webpack_require__(58);
 
 
 /***/ }),
@@ -526,7 +526,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_theWelcomePage_vue__ = __webpack_require__(48);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_theWelcomePage_vue__ = __webpack_require__(53);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_theWelcomePage_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_theWelcomePage_vue__);
 
 
@@ -537,7 +537,7 @@ var Foo = { template: '<div>foo</div>' };
 var Bar = { template: '<div>bar</div>' };
 var theCheckersComponent = __webpack_require__(12);
 var theLifeComponent = __webpack_require__(28);
-var infoBoxComponent = __webpack_require__(43);
+var infoBoxComponent = __webpack_require__(48);
 
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     mode: 'history',
@@ -16578,7 +16578,7 @@ var normalizeComponent = __webpack_require__(2)
 /* script */
 var __vue_script__ = __webpack_require__(31)
 /* template */
-var __vue_template__ = __webpack_require__(42)
+var __vue_template__ = __webpack_require__(47)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -16651,7 +16651,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.game-wrapper[data-v-3beebebb] {\n    margin: 30px;\n}\n.button[data-v-3beebebb] {\n    margin-top: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.game-wrapper[data-v-3beebebb] {\n    margin: 30px;\n}\n.button[data-v-3beebebb] {\n    margin-top: 5px;\n}\n.board[data-v-3beebebb] {\n}\n", ""]);
 
 // exports
 
@@ -16664,6 +16664,8 @@ exports.push([module.i, "\n.game-wrapper[data-v-3beebebb] {\n    margin: 30px;\n
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__theLifeComponents_theLifeBoard__ = __webpack_require__(32);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__theLifeComponents_theLifeBoard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__theLifeComponents_theLifeBoard__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__stupidComp__ = __webpack_require__(42);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__stupidComp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__stupidComp__);
 //
 //
 //
@@ -16726,11 +16728,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "theLifeComponent",
-    components: { TheLifeBoard: __WEBPACK_IMPORTED_MODULE_0__theLifeComponents_theLifeBoard___default.a },
+    components: { TheLifeBoard: __WEBPACK_IMPORTED_MODULE_0__theLifeComponents_theLifeBoard___default.a, stupidComponent: __WEBPACK_IMPORTED_MODULE_1__stupidComp___default.a },
     data: function data() {
         return {
             newHeight: 30,
@@ -16927,7 +16934,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.board-wrapper[data-v-3272ba20] {\n    margin-top: 10px;\n}\n", ""]);
+exports.push([module.i, "\n.board-wrapper[data-v-3272ba20] {\n    margin-top: 10px;\n    display: -webkit-inline-box;\n    display: -ms-inline-flexbox;\n    display: inline-flex;\n    -ms-flex-wrap: wrap;\n        flex-wrap: wrap;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    height: auto;\n}\n.life-col[data-v-3272ba20] {\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n}\n.life-row[data-v-3272ba20] {\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n}\n.row-holder[data-v-3272ba20] {\n    min-width: 100%;\n    max-width: 100%;\n}\n", ""]);
 
 // exports
 
@@ -16940,6 +16947,7 @@ exports.push([module.i, "\n.board-wrapper[data-v-3272ba20] {\n    margin-top: 10
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__theCellComponent__ = __webpack_require__(36);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__theCellComponent___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__theCellComponent__);
+//
 //
 //
 //
@@ -17079,7 +17087,7 @@ exports = module.exports = __webpack_require__(0)(false);
 
 
 // module
-exports.push([module.i, "\n.square[data-v-7d39c03e] {\n    width: 40px;\n    padding-bottom: 40px;\n    border: 2px solid grey;\n    position: relative;\n}\n", ""]);
+exports.push([module.i, "\n.square[data-v-7d39c03e] {\n    width: 40px;\n    height: 40px;\n    border: 2px solid grey;\n    position: relative;\n}\n@media (max-width: 400px) {\n.square[data-v-7d39c03e] {\n        width: 15px;\n        height: 15px;\n        /*padding-bottom: 40px;*/\n        border: 1px solid grey;\n        position: relative;\n}\n}\n", ""]);
 
 // exports
 
@@ -17163,28 +17171,33 @@ var render = function() {
     "div",
     { staticClass: "board-wrapper" },
     _vm._l(_vm.height, function(row) {
-      return _c("div", { staticClass: "is-multiline is-centered" }, [
-        _c(
-          "div",
-          { staticClass: "level-item" },
-          _vm._l(_vm.width, function(tile) {
-            return _c("the-cell-component", {
-              key: _vm.makeKey(row, tile),
-              attrs: {
-                "x-value": tile,
-                "y-value": row,
-                "is-alive": _vm.checkIfLiving(row, tile),
-                "game-phase": _vm.gamePhase
-              },
-              on: {
-                "add-piece": _vm.broadcastAddPiece,
-                "remove-piece": _vm.broadcastRemovePiece
-              }
-            })
-          }),
-          1
-        )
-      ])
+      return _c(
+        "div",
+        { staticClass: "is-multiline is-grouped-multiline row-holder" },
+        [
+          _c(
+            "div",
+            { staticClass: "level-item life-col" },
+            _vm._l(_vm.width, function(tile) {
+              return _c("the-cell-component", {
+                key: _vm.makeKey(row, tile),
+                staticClass: "life-row",
+                attrs: {
+                  "x-value": tile,
+                  "y-value": row,
+                  "is-alive": _vm.checkIfLiving(row, tile),
+                  "game-phase": _vm.gamePhase
+                },
+                on: {
+                  "add-piece": _vm.broadcastAddPiece,
+                  "remove-piece": _vm.broadcastRemovePiece
+                }
+              })
+            }),
+            1
+          )
+        ]
+      )
     }),
     0
   )
@@ -17203,191 +17216,352 @@ if (false) {
 /* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(43)
+}
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(45)
+/* template */
+var __vue_template__ = __webpack_require__(46)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-12ec37de"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/stupidComp.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-12ec37de", Component.options)
+  } else {
+    hotAPI.reload("data-v-12ec37de", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 43 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(44);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(1)("76a05004", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-12ec37de\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./stupidComp.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-12ec37de\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./stupidComp.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 44 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(0)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 45 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "stupidComp",
+    data: function data() {
+        return {
+            buttonname: "Matt",
+            users: {
+                meredith: {
+                    dob: "04"
+                },
+                matt: {
+                    dog: "04"
+                }
+            }
+        };
+    },
+    methods: {
+        changeName: function changeName() {
+            if (this.buttonname === "Matt") {
+                this.buttonname = "Chris";
+            } else {
+                this.buttonname = "Matt";
+            }
+        }
+    }
+});
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("button", { on: { click: _vm.changeName } }, [
+      _vm._v(_vm._s(_vm.buttonname))
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-12ec37de", module.exports)
+  }
+}
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "game-wrapper" },
+    { staticStyle: { "overflow-x": "auto" } },
     [
-      _c("section", { attrs: { id: "controls" } }, [
-        _c("div", { staticClass: "tile is-ancestor" }, [
-          _c("div", { staticClass: "tile is-12" }, [
-            _c("div", { staticClass: "tile is-2 is-parent" }, [
-              _c(
-                "article",
-                { staticClass: "tile is-child notification is-primary" },
-                [
-                  _c("div", { staticClass: "control" }, [
-                    _c("p", { staticClass: "title" }, [
-                      _vm._v(
-                        "\n                                Game Phase\n                            "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("label", { staticClass: "radio" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.gamePhase,
-                            expression: "gamePhase"
-                          }
-                        ],
-                        attrs: { type: "radio", value: "setup", disabled: "" },
-                        domProps: { checked: _vm._q(_vm.gamePhase, "setup") },
-                        on: {
-                          change: function($event) {
-                            _vm.gamePhase = "setup"
-                          }
-                        }
-                      }),
-                      _vm._v(
-                        "\n                                Setup\n                            "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("label", { staticClass: "radio" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.gamePhase,
-                            expression: "gamePhase"
-                          }
-                        ],
-                        attrs: { type: "radio", value: "run", disabled: "" },
-                        domProps: { checked: _vm._q(_vm.gamePhase, "run") },
-                        on: {
-                          change: function($event) {
-                            _vm.gamePhase = "run"
-                          }
-                        }
-                      }),
-                      _vm._v(
-                        "\n                                Running\n                            "
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass:
-                          "button start-button is-primary is-inverted",
-                        on: { click: _vm.startSimulation }
-                      },
-                      [
-                        _vm._v(
-                          "\n                                " +
-                            _vm._s(_vm.buttonText) +
-                            "\n                            "
-                        )
-                      ]
-                    )
-                  ])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "tile is-2 is-parent" }, [
-              _c(
-                "article",
-                { staticClass: "tile is-child notification is-primary" },
-                [
-                  _c("p", { staticClass: "title" }, [_vm._v("Board Size")]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "field" }, [
+      _c("div", { staticClass: "game-wrapper" }, [
+        _c("section", { attrs: { id: "controls" } }, [
+          _c("div", { staticClass: "tile is-ancestor" }, [
+            _c("div", { staticClass: "tile is-12" }, [
+              _c("div", { staticClass: "tile is-2 is-parent" }, [
+                _c(
+                  "article",
+                  { staticClass: "tile is-child notification is-primary" },
+                  [
                     _c("div", { staticClass: "control" }, [
-                      _c("label", { attrs: { for: "height" } }, [
-                        _vm._v("Height")
+                      _c("p", { staticClass: "title" }, [
+                        _vm._v(
+                          "\n                                    Game Phase\n                                "
+                        )
                       ]),
                       _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.newHeight,
-                            expression: "newHeight"
-                          }
-                        ],
-                        staticClass: "input is-primary",
-                        attrs: { id: "height", type: "text" },
-                        domProps: { value: _vm.newHeight },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                      _c("label", { staticClass: "radio" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.gamePhase,
+                              expression: "gamePhase"
                             }
-                            _vm.newHeight = $event.target.value
+                          ],
+                          attrs: {
+                            type: "radio",
+                            value: "setup",
+                            disabled: ""
+                          },
+                          domProps: { checked: _vm._q(_vm.gamePhase, "setup") },
+                          on: {
+                            change: function($event) {
+                              _vm.gamePhase = "setup"
+                            }
                           }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("label", { attrs: { for: "width" } }, [
-                        _vm._v("Width")
+                        }),
+                        _vm._v(
+                          "\n                                    Setup\n                                "
+                        )
                       ]),
                       _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.newWidth,
-                            expression: "newWidth"
-                          }
-                        ],
-                        staticClass: "input is-primary",
-                        attrs: { id: "width", type: "text" },
-                        domProps: { value: _vm.newWidth },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                      _c("label", { staticClass: "radio" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.gamePhase,
+                              expression: "gamePhase"
                             }
-                            _vm.newWidth = $event.target.value
+                          ],
+                          attrs: { type: "radio", value: "run", disabled: "" },
+                          domProps: { checked: _vm._q(_vm.gamePhase, "run") },
+                          on: {
+                            change: function($event) {
+                              _vm.gamePhase = "run"
+                            }
                           }
-                        }
-                      }),
+                        }),
+                        _vm._v(
+                          "\n                                    Running\n                                "
+                        )
+                      ]),
                       _vm._v(" "),
                       _c(
                         "a",
                         {
                           staticClass:
-                            "button is-primary is-inverted resize-button",
-                          on: { click: _vm.resetSize }
+                            "button start-button is-primary is-inverted",
+                          on: { click: _vm.startSimulation }
                         },
                         [
                           _vm._v(
-                            "Resize/Clear\n                                    Board"
+                            "\n                                    " +
+                              _vm._s(_vm.buttonText) +
+                              "\n                                "
                           )
                         ]
                       )
                     ])
-                  ])
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "tile is-2 is-parent" }, [
-              _c(
-                "article",
-                { staticClass: "tile is-child notification is-primary" },
-                [
-                  _c("p", { staticClass: "title" }, [
-                    _vm._v("Living Cells: " + _vm._s(_vm.getScore))
-                  ])
-                ]
-              )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "tile is-2 is-parent" }, [
+                _c(
+                  "article",
+                  { staticClass: "tile is-child notification is-primary" },
+                  [
+                    _c("p", { staticClass: "title" }, [_vm._v("Board Size")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "field" }, [
+                      _c("div", { staticClass: "control" }, [
+                        _c("label", { attrs: { for: "height" } }, [
+                          _vm._v("Height")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.newHeight,
+                              expression: "newHeight"
+                            }
+                          ],
+                          staticClass: "input is-primary",
+                          attrs: { id: "height", type: "text" },
+                          domProps: { value: _vm.newHeight },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.newHeight = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("label", { attrs: { for: "width" } }, [
+                          _vm._v("Width")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.newWidth,
+                              expression: "newWidth"
+                            }
+                          ],
+                          staticClass: "input is-primary",
+                          attrs: { id: "width", type: "text" },
+                          domProps: { value: _vm.newWidth },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.newWidth = $event.target.value
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass:
+                              "button is-primary is-inverted resize-button",
+                            on: { click: _vm.resetSize }
+                          },
+                          [
+                            _vm._v(
+                              "Resize/Clear\n                                        Board"
+                            )
+                          ]
+                        )
+                      ])
+                    ])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "tile is-2 is-parent" }, [
+                _c(
+                  "article",
+                  { staticClass: "tile is-child notification is-primary" },
+                  [
+                    _c("p", { staticClass: "title" }, [
+                      _vm._v("Living Cells: " + _vm._s(_vm.getScore))
+                    ])
+                  ]
+                )
+              ])
             ])
           ])
         ])
       ]),
       _vm._v(" "),
       _c("the-life-board", {
+        staticClass: "board",
         attrs: {
           height: _vm.height,
           width: _vm.width,
@@ -17411,19 +17585,19 @@ if (false) {
 }
 
 /***/ }),
-/* 43 */
+/* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(44)
+  __webpack_require__(49)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(46)
+var __vue_script__ = __webpack_require__(51)
 /* template */
-var __vue_template__ = __webpack_require__(47)
+var __vue_template__ = __webpack_require__(52)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -17462,13 +17636,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 44 */
+/* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(45);
+var content = __webpack_require__(50);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -17488,7 +17662,7 @@ if(false) {
 }
 
 /***/ }),
-/* 45 */
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -17502,7 +17676,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n", ""]);
 
 
 /***/ }),
-/* 46 */
+/* 51 */
 /***/ (function(module, exports) {
 
 //
@@ -17511,7 +17685,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n", ""]);
 //
 
 /***/ }),
-/* 47 */
+/* 52 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -17531,19 +17705,19 @@ if (false) {
 }
 
 /***/ }),
-/* 48 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(49)
+  __webpack_require__(54)
 }
 var normalizeComponent = __webpack_require__(2)
 /* script */
-var __vue_script__ = __webpack_require__(51)
+var __vue_script__ = __webpack_require__(56)
 /* template */
-var __vue_template__ = __webpack_require__(52)
+var __vue_template__ = __webpack_require__(57)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -17582,13 +17756,13 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 49 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(50);
+var content = __webpack_require__(55);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
@@ -17608,7 +17782,7 @@ if(false) {
 }
 
 /***/ }),
-/* 50 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
@@ -17622,7 +17796,7 @@ exports.push([module.i, "\n@media (max-width: 500px) {\n.tabs ul[data-v-161496eb
 
 
 /***/ }),
-/* 51 */
+/* 56 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -17654,7 +17828,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 52 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -17718,7 +17892,7 @@ if (false) {
 }
 
 /***/ }),
-/* 53 */
+/* 58 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
