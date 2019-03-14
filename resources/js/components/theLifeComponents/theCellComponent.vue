@@ -44,7 +44,7 @@
         border: 2px solid grey;
         position: relative;
     }
-    @media (max-width: 400px) {
+    @media (max-width: 600px) {
         .square {
             width: 15px;
             height: 15px;
